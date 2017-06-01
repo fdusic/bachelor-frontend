@@ -1,0 +1,21 @@
+.facility-title{
+  font-family: 'Brush Script MT', cursive;
+  font-size: 85px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 120px;
+  color: #ff0006;
+}
+
+.jumbotron {
+  background-image: url("../../../images/facilities.jpg");
+  background-size: cover;}
+
+tr:hover{
+  cursor: pointer;
+}
+
+td{
+  text-align: left;
+}
