@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http,Headers} from "@angular/http";
 import {Facility} from "../beans/facility";
+import {Section} from "../beans/section";
 
 @Injectable()
 export class FSMService {
@@ -27,7 +28,11 @@ export class FSMService {
   }
 
   deleteFacility(idF:number){
-    return this.http.post('http://localhost:8080/fsm/deleteFacility',idF);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/deleteFacility',idF,{
+      headers:headers
+    });
   }
 
   getFacilities(){
@@ -35,10 +40,53 @@ export class FSMService {
   }
 
   getFacilityById(idF:number){
-    return this.http.post('http://localhost:8080/fsm/getFacilityById',idF);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getFacilityById',idF,{
+      headers:headers
+    });
   }
-  ///////////////////
 
+
+
+  ///////////////////
+  //CRUD ZA SECTION
+
+  getSectionById(idS:number){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getSectionById',idS,{
+      headers:headers
+    });
+  }
+
+
+  createSection(section:Section){
+    const body = JSON.stringify(section);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createSection',body,{
+      headers:headers
+    });
+  }
+
+  deleteSection(idS:number){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/deleteSection',idS,{
+      headers:headers
+    });
+  }
+
+
+  updateSection(section:Section){
+    const body = JSON.stringify(section);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/updateSection',body,{
+      headers:headers
+    });
+  }
 
 
 

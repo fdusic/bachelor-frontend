@@ -1,29 +1,42 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1 class="facility-title">Facilities</h1>
-    <p style="color: #f9003d">We have many facilities...</p>
+    <p style="color: #b8b5c0">We have many facilities...</p>
   </div>
 </div>
 
 
-<div class="container-fluid bg-3 text-center">
-  <table class="table table-hover table-inverse" id="facilitiesTable">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Surface</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let facility of facilities" [routerLink]="['/home/facilities',facility.idF]">
-      <td>{{facility.idF}}</td>
-      <td>{{facility.name}}</td>
-      <td>{{facility.address}}</td>
-      <td>{{facility.surface}}</td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container-fluid facilities-list">
+
+  <div class="listWrap">
+
+    <ul class="list">
+
+      <li>
+        <span>ID</span>
+        <span>Name</span>
+        <span>Address</span>
+        <span>Surface</span>
+        <span>Actions</span>
+        <span></span>
+      </li>
+      <li *ngFor="let facility of facilities">
+        <span>{{facility.idF}}</span>
+        <span>{{facility.name}}</span>
+        <span>{{facility.address}}</span>
+        <span><span class="label label-success">{{facility.surface+' m2'}}</span></span>
+        <span><button [routerLink]="['/home/facilities',facility.idF]" type="button" class="btn btn-default btn-sm">More..</button></span>
+        <span></span>
+      </li>
+
+      <li>
+
+      </li>
+    </ul>
+
+  </div>
+
 </div>
+
+
 

@@ -7,12 +7,21 @@ import {FacilityDetailComponent} from "./components/facility-detail/facility-det
 import {FacilitiesComponent} from "./components/facilities/facilities.component";
 import {UpdateFacilityComponent} from "./components/forms/update-facility/update-facility.component";
 import {RegistrationReportComponent} from "./components/forms/registration-report/registration-report.component";
+
 import {RegistrationReportsComponent} from "./components/registration-reports/registration-reports.component";
+
+import {AddSectionComponent} from "./components/forms/add-section/add-section.component";
+import {SectionDetailComponent} from "./components/section-detail/section-detail.component";
+import {UpdateSectionComponent} from "./components/forms/update-section/update-section.component";
+
 
 
 const APP_ROUTES: Routes = [
   {path:'home',component:HomeComponent, children:[
+    {path:'addsection/:idF',component:AddSectionComponent},
     {path:'addfacility', component:AddFacilityComponent},
+    {path:'sections/update/:idS', component:UpdateSectionComponent},
+    {path:'sections/:idS', component:SectionDetailComponent},
     {path:'facilities/update/:idF', component:UpdateFacilityComponent},
     {path:'facilities/:idF',component:FacilityDetailComponent},
     {path:'facilities',component:FacilitiesComponent},

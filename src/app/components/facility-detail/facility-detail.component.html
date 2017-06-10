@@ -1,12 +1,126 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1 class="facility-title">Facility: {{facility.name}}</h1>
-    <p style="color: #134020">We have a lot of sections...</p>
+    <p style="color: #b8b5c0">Take a look at our sections...</p>
   </div>
 </div>
-<a class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Section <span class="glyphicon glyphicon-plus"></span></a>
-<a class="a_btn btn-outlined btn-black btn-lg" data-toggle="modal" data-target="#confirmDeleteModal" data-wow-delay="0.7s">Delete <span class="glyphicon glyphicon-trash"></span></a>
-<a [routerLink]="['/home/facilities/update',facility.idF]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Edit <span class="glyphicon glyphicon-list"></span></a>
+<div class="container" align="center">
+  <a [routerLink]="['/home/addsection',facility.idF]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Section <span class="glyphicon glyphicon-plus"></span></a>
+  <a class="a_btn btn-outlined btn-black btn-lg" data-toggle="modal" data-target="#confirmDeleteModal" data-wow-delay="0.7s">Delete <span class="glyphicon glyphicon-trash"></span></a>
+  <a [routerLink]="['/home/facilities/update',facility.idF]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Edit <span class="glyphicon glyphicon-list"></span></a>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row" style="text-align: left">
+    <label style="font-family: Copperplate; font-size: 30px" align="left">Facility details:</label>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="offer offer-default">
+        <div class="shape">
+          <div class="shape-text">
+            <span class="glyphicon glyphicon glyphicon-eye-open"></span>
+          </div>
+        </div>
+        <div class="offer-content">
+          <h3 class="lead">
+            Id : <label class="label label-success"> <br>{{facility.idF}}</label>
+          </h3>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="offer offer-default">
+        <div class="shape">
+          <div class="shape-text">
+            <span class="glyphicon glyphicon glyphicon-th"></span>
+          </div>
+        </div>
+        <div class="offer-content">
+          <h3 class="lead">
+            Surface : <label class="label label-success"> <br>{{facility.surface+' m2'}}</label>
+          </h3>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="offer offer-radius offer-default">
+        <div class="shape">
+          <div class="shape-text">
+            <span class="glyphicon  glyphicon-user"></span>
+          </div>
+        </div>
+        <div class="offer-content">
+          <h3 class="lead">
+            Name : <label class="label label-success"> <br>{{facility.name}}</label>
+          </h3>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="offer offer-default">
+        <div class="shape">
+          <div class="shape-text">
+            <span class="glyphicon  glyphicon-home"></span>
+          </div>
+        </div>
+        <div class="offer-content">
+          <h3 class="lead">
+            Address : <label class="label label-success"> <br>{{facility.address}}</label>
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br>
+
+<div class="container facilities-list">
+  <div class="row" style="text-align: left">
+    <label style="font-family: Copperplate; font-size: 30px" align="left">Sections:</label>
+  </div>
+  <br>
+
+  <div class="listWrap">
+
+    <ul class="list">
+
+      <li>
+        <span>ID</span>
+        <span>Name</span>
+        <span>Description</span>
+        <span>Surface</span>
+        <span>Actions</span>
+        <span></span>
+      </li>
+      <li *ngFor="let section of facility.sections">
+        <span>{{section.idS}}</span>
+        <span>{{section.name}}</span>
+        <span>{{section.description}}</span>
+        <span><span class="label label-success">{{section.surface+' m2'}}</span></span>
+        <span><button [routerLink]="['/home/sections',section.idS]" type="button" class="btn btn-default btn-sm">More..</button></span>
+        <span></span>
+      </li>
+
+      <li>
+
+      </li>
+    </ul>
+
+  </div>
+
+</div>
+
 
 
 <div id="confirmDeleteModal" class="modal fade in">

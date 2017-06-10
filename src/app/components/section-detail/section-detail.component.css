@@ -1,0 +1,79 @@
+.facility-title{
+  font-family: 'Brush Script MT', cursive;
+  font-size: 85px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 120px;
+  color: #b8b5c0;
+}
+
+.jumbotron {
+  background-image: url("../../../images/facility-jumbotron.jpg");
+  background-size: cover;}
+
+.a_btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+  -moz-user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size:14px;
+  line-height:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  padding:8px 20px;
+}
+
+.btn-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.btn-outlined.btn-black {
+  background: none;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-outlined.btn-black:hover,
+.btn-outlined.btn-black:active {
+  color: #FFF;
+  background: #000000;
+  border-color: #000000;
+}
+
+
+/*dasdasda*/
+
+.modal .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+.modal .modal-header .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.modal .modal-footer {
+  border-top: none;
+  padding: 0;
+}
+.modal .modal-footer .btn-group > .btn:first-child {
+  border-bottom-left-radius: 0;
+}
+.modal .modal-footer .btn-group > .btn:last-child {
+  border-top-right-radius: 0;
+}

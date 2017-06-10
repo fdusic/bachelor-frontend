@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 align="center" style="margin-top: 70px">Facility form</h1>
+  <h1 align="center" style="margin-top: 70px">Section form</h1>
   <hr>
 
   <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
@@ -17,9 +17,9 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" name="address" required ngModel
-          >
+          <label for="description">Description</label>
+          <textarea class="form-control" id="description" name="description" required ngModel
+          ></textarea>
         </div>
         <div class="col-lg-6">
           <label for="surface">Surface area</label>

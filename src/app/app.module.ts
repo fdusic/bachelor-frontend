@@ -15,8 +15,14 @@ import { FacilityDetailComponent } from './components/facility-detail/facility-d
 import { FacilitiesComponent } from './components/facilities/facilities.component';
 import { UpdateFacilityComponent } from './components/forms/update-facility/update-facility.component';
 import { RegistrationReportComponent } from './components/forms/registration-report/registration-report.component';
+
 import {LoginRegisterService} from "./services/login-register.service";
 import { RegistrationReportsComponent } from './components/registration-reports/registration-reports.component';
+
+import { AddSectionComponent } from './components/forms/add-section/add-section.component';
+import { SectionDetailComponent } from './components/section-detail/section-detail.component';
+import { UpdateSectionComponent } from './components/forms/update-section/update-section.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +36,10 @@ import { RegistrationReportsComponent } from './components/registration-reports/
     FacilitiesComponent,
     UpdateFacilityComponent,
     RegistrationReportComponent,
-    RegistrationReportsComponent
+    RegistrationReportsComponent,
+    AddSectionComponent,
+    SectionDetailComponent,
+    UpdateSectionComponent
   ],
   imports: [
     BrowserModule,

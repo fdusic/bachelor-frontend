@@ -1,0 +1,39 @@
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1 class="facility-title">Section: {{section.name}}</h1>
+    <p style="color: #b8b5c0">Just one section...</p>
+  </div>
+</div>
+<div class="container" align="center">
+  <a [routerLink]="['/home/addmachine',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Machine <span class="glyphicon glyphicon-plus"></span></a>
+  <a class="a_btn btn-outlined btn-black btn-lg" data-toggle="modal" data-target="#confirmDeleteModal" data-wow-delay="0.7s">Delete <span class="glyphicon glyphicon-trash"></span></a>
+  <a [routerLink]="['/home/sections/update',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Edit <span class="glyphicon glyphicon-list"></span></a>
+</div>
+
+
+<hr>
+
+
+
+
+<div id="confirmDeleteModal" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+        <h4 class="modal-title">Delete section: {{section.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Are you sure you want to permanently erase this section?</h4>
+        <p>You can’t undo this action.</p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal" (click)="deleteSection()"><span class="glyphicon glyphicon-check"></span> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

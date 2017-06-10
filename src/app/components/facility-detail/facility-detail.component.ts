@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Facility} from "../../beans/facility";
 import {FSMService} from "../../services/fsm.service";
 import {Router, ActivatedRoute} from "@angular/router";
+import {Section} from "../../beans/section";
 
 @Component({
   selector: 'app-facility-detail',
