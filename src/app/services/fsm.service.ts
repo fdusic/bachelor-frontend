@@ -7,8 +7,6 @@ export class FSMService {
 
   constructor(private http:Http) { }
 
-
-
   //CRUD ZA FACILITY
   createFacility(facility:Facility){
     const body = JSON.stringify(facility);

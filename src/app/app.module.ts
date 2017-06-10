@@ -15,6 +15,8 @@ import { FacilityDetailComponent } from './components/facility-detail/facility-d
 import { FacilitiesComponent } from './components/facilities/facilities.component';
 import { UpdateFacilityComponent } from './components/forms/update-facility/update-facility.component';
 import { RegistrationReportComponent } from './components/forms/registration-report/registration-report.component';
+import {LoginRegisterService} from "./services/login-register.service";
+import { RegistrationReportsComponent } from './components/registration-reports/registration-reports.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { RegistrationReportComponent } from './components/forms/registration-rep
     FacilityDetailComponent,
     FacilitiesComponent,
     UpdateFacilityComponent,
-    RegistrationReportComponent
+    RegistrationReportComponent,
+    RegistrationReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { RegistrationReportComponent } from './components/forms/registration-rep
     HttpModule,
     routing
   ],
-  providers: [FSMService],
+  providers: [FSMService, LoginRegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

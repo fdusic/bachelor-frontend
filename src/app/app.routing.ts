@@ -7,6 +7,7 @@ import {FacilityDetailComponent} from "./components/facility-detail/facility-det
 import {FacilitiesComponent} from "./components/facilities/facilities.component";
 import {UpdateFacilityComponent} from "./components/forms/update-facility/update-facility.component";
 import {RegistrationReportComponent} from "./components/forms/registration-report/registration-report.component";
+import {RegistrationReportsComponent} from "./components/registration-reports/registration-reports.component";
 
 
 const APP_ROUTES: Routes = [
@@ -16,6 +17,7 @@ const APP_ROUTES: Routes = [
     {path:'facilities/:idF',component:FacilityDetailComponent},
     {path:'facilities',component:FacilitiesComponent},
     {path:'registrationreport',component:RegistrationReportComponent},
+    {path:'registrationReports', component: RegistrationReportsComponent},
     {path:'',component:WelcomeComponent}
   ]},
   {path:'',component:LoginComponent}

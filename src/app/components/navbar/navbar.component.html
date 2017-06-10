@@ -15,7 +15,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a>Link</a></li>
-        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a [routerLink]="['/home/registrationreport']">Create registration report</a></li>
+            <li><a [routerLink]="['/home/registrationReports']">View registration reports</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facilities <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -34,7 +40,7 @@
             <li><a href="#">Another action</a></li>
             <li><a [routerLink]="['/home/registrationreport']">Registration report</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li><a [routerLink]="['/']">Logout</a></li>
           </ul>
         </li>
       </ul>

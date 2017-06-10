@@ -1,0 +1,36 @@
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1 class="facility-title">Registration reports</h1>
+    <p style="color: #f9003d">New people have joined our team</p>
+  </div>
+</div>
+
+
+<div class="container-fluid bg-3 text-left">
+  <table class="table table-hover table-inverse" id="facilitiesTable">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Proffesion</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let rr of registrationReports">
+      <td>{{rr.username}}</td>
+      <td>{{rr.name}}</td>
+      <td>{{rr.surname}}</td>
+      <td>{{rr.address}}</td>
+      <td>{{rr.email}}</td>
+      <td>{{rr.phone}}</td>
+      <td>{{rr.proffesion}}</td>
+      <td><button type="button" class="btn btn-default btn-sm" (click)="register(rr)"><span class="glyphicon glyphicon-ok"></span> Approve</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
