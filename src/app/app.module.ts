@@ -24,7 +24,7 @@ import { SectionDetailComponent } from './components/section-detail/section-deta
 import { UpdateSectionComponent } from './components/forms/update-section/update-section.component';
 import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 import { UpdateMachineComponent } from './components/forms/update-machine/update-machine.component';
-
+import { FailureReportsComponent } from './components/failure-reports/failure-reports.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { UpdateMachineComponent } from './components/forms/update-machine/update
     SectionDetailComponent,
     UpdateSectionComponent,
     AddMachineComponent,
-    UpdateMachineComponent
+    UpdateMachineComponent,
+    FailureReportsComponent
   ],
   imports: [
     BrowserModule,

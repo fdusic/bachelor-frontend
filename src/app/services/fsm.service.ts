@@ -4,6 +4,7 @@ import {Facility} from "../beans/facility";
 import {Section} from "../beans/section";
 import {Interface} from "../beans/interface";
 import {Machine} from "../beans/machine";
+import {FailureReport} from "../beans/failureReport";
 
 @Injectable()
 export class FSMService {
@@ -150,10 +151,28 @@ export class FSMService {
   }
 
 
+  // report failure
 
+  createFailureReport(rf : FailureReport){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createFailureReport',JSON.stringify(rf),{
+      headers:headers
+    });
+  }
 
+  getFailureReports(){
+    return this.http.get('http://localhost:8080/fsm/getFailureReports');
+  }
 
-
+  fixed(r){
+    console.log(r);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/fixed',JSON.stringify(r),{
+      headers:headers
+    });
+  }
 
 
 }

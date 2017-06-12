@@ -15,8 +15,7 @@ import {SectionDetailComponent} from "./components/section-detail/section-detail
 import {UpdateSectionComponent} from "./components/forms/update-section/update-section.component";
 import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 import {UpdateMachineComponent} from "./components/forms/update-machine/update-machine.component";
-
-
+import {FailureReportsComponent} from "./components/failure-reports/failure-reports.component";
 
 const APP_ROUTES: Routes = [
   {path:'home',component:HomeComponent, children:[
@@ -31,6 +30,7 @@ const APP_ROUTES: Routes = [
     {path:'facilities',component:FacilitiesComponent},
     {path:'registrationreport',component:RegistrationReportComponent},
     {path:'registrationReports', component: RegistrationReportsComponent},
+    {path:'failureReports', component:FailureReportsComponent},
     {path:'',component:WelcomeComponent}
   ]},
   {path:'',component:LoginComponent}

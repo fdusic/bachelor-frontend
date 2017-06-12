@@ -71,7 +71,8 @@
                     <div class="detail">
                       <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
                       <hr>
-                      <div class="row" style="margin-bottom: 5px;display: none"><a [routerLink]="['/home/updatemachine',machine.idM]" title="Edit" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-list"></span></a></div>
+                      <!--<div class="row" style="margin-bottom: 5px;display: none"><a [routerLink]="['/home/updatemachine',machine.idM]" title="Edit" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-list"></span></a></div>-->
+                      <div class="row" style="margin-bottom: 5px"><a class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s" data-toggle="modal" data-target="#sendReport" title="Report" (click)="setSelected(machine)"><span class="glyphicon glyphicon-wrench"></span></a> </div>
 
                       <div class="row" style="margin-bottom: 5px"><a (click)="assignMachineForDelete(machine)" data-toggle="modal" data-target="#confirmMachineDeleteModal" title="Delete" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-trash"></span></a></div>
 
@@ -118,11 +119,26 @@
   </div>
 </section>
 
+<div id="sendReport" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-
-
-
-
+      <div class="modal-header">
+        <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+        <h4 class="modal-title">Send a report about a failure on machine : {{m.name}}. </h4>
+      </div>
+      <div class="modal-body">
+          <textarea class="form-control" #textarea></textarea>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal" (click)="sendReport()"><span class="glyphicon glyphicon-check"></span> Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="confirmDeleteModal" class="modal fade in">
   <div class="modal-dialog">

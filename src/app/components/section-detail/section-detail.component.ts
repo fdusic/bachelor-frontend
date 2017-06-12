@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Section} from "../../beans/section";
 import {FSMService} from "../../services/fsm.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Machine} from "../../beans/machine";
+import {FailureReport} from "../../beans/failureReport";
 
 @Component({
   selector: 'app-section-detail',
@@ -15,6 +16,10 @@ export class SectionDetailComponent implements OnInit {
   private machines:Machine[]=[];
   private machineForDelete:Machine = new Machine();
   private machineForDetails:Machine = new Machine();
+
+  @ViewChild("textarea") textarea : any;
+
+  private m : Machine;
 
   constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router) { }
 
@@ -41,7 +46,6 @@ export class SectionDetailComponent implements OnInit {
     );
   }
 
-
   assignMachineForDelete(machine:Machine){
     this.machineForDelete = machine;
   }
@@ -57,8 +61,21 @@ export class SectionDetailComponent implements OnInit {
     );
   }
 
-  assignMachineForDetails(machine:Machine){
+  assignMachineForDetails(machine:Machine) {
     this.machineForDetails = machine;
+  }
+
+  sendReport(){
+    let rf = new FailureReport();
+    rf.error = this.textarea.nativeElement.value;
+    rf.machine = this.m;
+    this.fsmService.createFailureReport(rf).subscribe(
+      () => {}
+    );
+  }
+
+  setSelected(m){
+    this.m = m;
   }
 
 }
