@@ -23,6 +23,7 @@ import { AddSectionComponent } from './components/forms/add-section/add-section.
 import { SectionDetailComponent } from './components/section-detail/section-detail.component';
 import { UpdateSectionComponent } from './components/forms/update-section/update-section.component';
 import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
+import { UpdateMachineComponent } from './components/forms/update-machine/update-machine.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {AddMachineComponent} from "./components/forms/add-machine/add-machine.co
     AddSectionComponent,
     SectionDetailComponent,
     UpdateSectionComponent,
-    AddMachineComponent
+    AddMachineComponent,
+    UpdateMachineComponent
   ],
   imports: [
     BrowserModule,

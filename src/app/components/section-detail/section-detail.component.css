@@ -151,3 +151,19 @@ img{max-width:100%;}
 .my-list:hover .detail{top:0;}
 
 /*dadasdasda*/
+
+.my-content{
+  background-color:#222;
+  color:#ddd;
+}
+
+.my-dialog {
+  width: 450px;
+  overflow: auto;
+  background-color:#333;
+}
+
+/*dadadasd*/
+
+
+

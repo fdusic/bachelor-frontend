@@ -15,11 +15,11 @@
 
 
 
-<!--home-content-top starts from here-->
+
 <section class="home-content-top">
   <div class="container">
 
-    <!--our-quality-shadow-->
+
     <div class="clearfix"></div>
     <h1 class="heading1">Welcome to section</h1>
     <div class="tabbable-panel margin-tops4 ">
@@ -37,13 +37,22 @@
               <div class="row"> <img src="./images/section-details.jpg" class="img-responsive"> </div>
             </div>
             <div class="col-md-8">
-              <h4 class="heading4">Magento Product Upload Services</h4>
-              <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
-              <h4 class="heading4">Magento Product Upload Services</h4>
-              <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
-              <a href="#">
-                <div class="btns">View More <i class="fa fa-angle-right"></i></div>
-              </a> </div>
+              <div class="row" style="text-align: center">
+                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">idS:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.idS}}</strong>
+              </div>
+              <div class="row" style="text-align: center">
+                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Name:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.name}}</strong>
+              </div>
+              <div class="row" style="text-align: center">
+                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Description:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.description}}</strong>
+              </div>
+              <div class="row" style="text-align: center">
+                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Surface:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.surface+' m2'}}</strong>
+              </div>
+              <div class="row" style="text-align: center">
+                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Machines:</label><strong style="font-family: Copperplate; font-size: 25px">  {{machines.length}}</strong>
+              </div>
+            </div>
           </div>
 
           <div class="tab-pane fade" id="tab_default_2">
@@ -61,11 +70,13 @@
                     <div class="offer">Description: {{machine.description}}</div>
                     <div class="detail">
                       <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
-                      <br>
-                      <br>
                       <hr>
-                      <a title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span></a>
-                      <a title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                      <div class="row" style="margin-bottom: 5px;display: none"><a [routerLink]="['/home/updatemachine',machine.idM]" title="Edit" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-list"></span></a></div>
+
+                      <div class="row" style="margin-bottom: 5px"><a (click)="assignMachineForDelete(machine)" data-toggle="modal" data-target="#confirmMachineDeleteModal" title="Delete" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-trash"></span></a></div>
+
+                      <div class="row"><a data-toggle="modal" (click)="assignMachineForDetails(machine)" data-target="#machineDetailsModal" title="Details" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-zoom-in"></span></a></div>
+
                     </div>
                   </div>
                 </div>
@@ -106,7 +117,6 @@
     </div>
   </div>
 </section>
-<!--home-content-top ends here-->
 
 
 
@@ -131,6 +141,88 @@
           <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
           <button class="btn btn-primary" data-dismiss="modal" (click)="deleteSection()"><span class="glyphicon glyphicon-check"></span> Delete</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="confirmMachineDeleteModal" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+        <h4 class="modal-title">Delete machine: {{machineForDelete.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Are you sure you want to permanently erase this machine?</h4>
+        <p>You can’t undo this action.</p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal" (click)="deleteMachine()"><span class="glyphicon glyphicon-check"></span> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="machineDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog my-dialog">
+    <div class="modal-content my-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Machine details <small>and interfaces :)</small></h4>
+      </div>
+      <div class="modal-body">
+
+
+        <label style="color: #66CC44" align="left">Machine:</label>
+        <table style="margin-top: -10px" class="table table-hover table-inverse" id="machineTableModal">
+          <thead>
+          <tr>
+            <th>idM</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>{{machineForDetails.idM}}</td>
+            <td>{{machineForDetails.name}}</td>
+            <td>{{machineForDetails.image}}</td>
+            <td>{{machineForDetails.description}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <hr>
+
+        <label style="color: #5bc0de" align="left">Interfaces:</label>
+        <table style="margin-top: -10px" class="table table-hover table-inverse" id="ifaceTableModal">
+          <thead>
+          <tr>
+            <th>idI</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let iface of machineForDetails.supportsInterface">
+            <td>{{iface.idI}}</td>
+            <td>{{iface.name}}</td>
+            <td>{{iface.description}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

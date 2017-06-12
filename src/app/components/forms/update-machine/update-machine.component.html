@@ -1,0 +1,119 @@
+<div class="container">
+  <h1 align="center" style="margin-top: 70px">Machine form</h1>
+  <hr>
+
+  <form (ngSubmit)="onSubmit(f)" ngNativeValidate #f="ngForm">
+
+
+    <div class="form-group">
+      <label for="idM">idM</label>
+      <input type="text"
+             class="form-control"
+             id="idM"
+             name="idM"
+             [ngModel]="machine.idM"
+             required
+             readonly
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text"
+             class="form-control"
+             id="name"
+             name="name"
+             [ngModel]="machine.name"
+             required>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" name="description" required [ngModel]="machine.description"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <label class="input-group-btn">
+              <span class="btn btn-primary">
+                  Browse image&hellip; <input name="image" (change)="imageChange($event)" id="image" type="file" accept=".png" style="display: none;" multiple required ngModel>
+              </span>
+        </label>
+        <input type="text" class="form-control" readonly name="imageName" id="imageName" [ngModel]="imageName">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="container" style="width: 100%">
+        <div class="row">
+
+          <div class="panel panel-default">
+            <div class="panel-heading"><b>Interfaces</b> <a data-toggle="modal" data-target="#interfaceModal" class="btn btn-success pull-right" style="margin-top: -7px"><span class="glyphicon glyphicon-plus"></span></a></div>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let interface of interfaces">
+                <b>Name: </b>{{interface.name}}
+                <b>Description: </b>{{interface.description}}
+                <div class="material-switch pull-right">
+                  <input id="{{'switch'+interface.idI}}" name="{{'switch'+interface.idI}}" [ngModel]="doesMachineSupportInterface(interface)" type="checkbox"/>
+                  <label for="{{'switch'+interface.idI}}" class="label-success"></label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-danger" onclick=history.go(-1)>Discard</a>
+
+  </form>
+
+
+
+  <div class="modal fade" id="interfaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" id="closeInterfaceModalButton" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <h3 class="modal-title" id="lineModalLabel">Interface form</h3>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmitInterface(ff.value)" ngNativeValidate #ff="ngForm">
+            <div class="form-group">
+              <label for="iname">Name</label>
+              <input type="text" class="form-control" required ngModel name="name" id="iname" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="idescription">Description</label>
+              <textarea class="form-control" id="idescription" name="description" required ngModel placeholder="Description"></textarea>
+            </div>
+
+            <div class="modal-footer">
+              <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Close</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="submit" id="submitInterfaceButton" class="btn btn-primary btn-hover-green" data-action="save" role="button">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+

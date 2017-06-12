@@ -116,6 +116,15 @@ export class FSMService {
   }
 
 
+  deleteMachine(idM:number){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/deleteMachine',idM,{
+      headers:headers
+    });
+  }
+
+
   /////////
   // CRUD ZA INTERFACE
   createInterface(iface:Interface){
