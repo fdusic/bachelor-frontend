@@ -13,12 +13,14 @@ import {RegistrationReportsComponent} from "./components/registration-reports/re
 import {AddSectionComponent} from "./components/forms/add-section/add-section.component";
 import {SectionDetailComponent} from "./components/section-detail/section-detail.component";
 import {UpdateSectionComponent} from "./components/forms/update-section/update-section.component";
+import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 
 
 
 const APP_ROUTES: Routes = [
   {path:'home',component:HomeComponent, children:[
     {path:'addsection/:idF',component:AddSectionComponent},
+    {path:'addmachine/:idS',component:AddMachineComponent},
     {path:'addfacility', component:AddFacilityComponent},
     {path:'sections/update/:idS', component:UpdateSectionComponent},
     {path:'sections/:idS', component:SectionDetailComponent},

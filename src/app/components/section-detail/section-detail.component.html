@@ -1,7 +1,7 @@
 <div class="jumbotron">
   <div class="container text-center">
     <h1 class="facility-title">Section: {{section.name}}</h1>
-    <p style="color: #b8b5c0">Just one section...</p>
+    <p style="color: #e5d05b">Just one section...</p>
   </div>
 </div>
 <div class="container" align="center">
@@ -12,6 +12,104 @@
 
 
 <hr>
+
+
+
+<!--home-content-top starts from here-->
+<section class="home-content-top">
+  <div class="container">
+
+    <!--our-quality-shadow-->
+    <div class="clearfix"></div>
+    <h1 class="heading1">Welcome to section</h1>
+    <div class="tabbable-panel margin-tops4 ">
+      <div class="tabbable-line">
+        <ul class="nav nav-tabs tabtop  tabsetting">
+          <li class="active"> <a href="#tab_default_1" data-toggle="tab"> Details </a> </li>
+          <li> <a href="#tab_default_2" data-toggle="tab"> Machines </a> </li>
+          <li> <a href="#tab_default_3" data-toggle="tab"> Topology </a> </li>
+          <li> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
+        </ul>
+        <div class="tab-content margin-tops">
+
+          <div class="tab-pane active fade in" id="tab_default_1">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/section-details.jpg" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <h4 class="heading4">Magento Product Upload Services</h4>
+              <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
+              <h4 class="heading4">Magento Product Upload Services</h4>
+              <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
+              <a href="#">
+                <div class="btns">View More <i class="fa fa-angle-right"></i></div>
+              </a> </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_default_2">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/sd-machines.jpg" style="width: 100%;height: 100%" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let machine of machines">
+                  <div class="my-list" style="height: 250px">
+                    <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
+                    <h3>Machine: {{machine.name}}</h3>
+                    <span>Id: {{machine.idM}}</span>
+                    <span class="pull-right">Section: {{section.idS}}</span>
+                    <div class="offer">Description: {{machine.description}}</div>
+                    <div class="detail">
+                      <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
+                      <br>
+                      <br>
+                      <hr>
+                      <a title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span></a>
+                      <a title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_default_3">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/sd-topology.png" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <h4 class="heading4">Shopify Product Upload </h4>
+              <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
+              <h4 class="heading4">Shopify Product Upload </h4>
+              <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
+              <a href="#">
+                <div class="btns">View More <i class="fa fa-angle-right"></i></div>
+              </a> </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_default_4">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/w_process.jpg" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <h4 class="heading4">OpenCart Product Upload</h4>
+              <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
+              <h4 class="heading4">OpenCart Product Upload</h4>
+              <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
+              <a href="#">
+                <div class="btns">View More <i class="fa fa-angle-right"></i></div>
+              </a> </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--home-content-top ends here-->
+
+
+
 
 
 

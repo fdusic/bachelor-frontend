@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {Http,Headers} from "@angular/http";
 import {Facility} from "../beans/facility";
 import {Section} from "../beans/section";
+import {Interface} from "../beans/interface";
+import {Machine} from "../beans/machine";
 
 @Injectable()
 export class FSMService {
@@ -84,6 +86,56 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/updateSection',body,{
+      headers:headers
+    });
+  }
+
+
+  //////////////
+  // CRUD ZA MACHINE
+
+  createMachine(formData:FormData){
+    return this.http.post('http://localhost:8080/fsm/createMachine',formData,{withCredentials:true});
+  }
+
+  getMachineById(idM:number){
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getMachineById',idM,{
+      headers:headers
+    });
+  }
+
+  getMachinesBySection(section:Section){
+    const body = JSON.stringify(section);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getMachinesBySection',body,{
+      headers:headers
+    });
+  }
+
+
+  /////////
+  // CRUD ZA INTERFACE
+  createInterface(iface:Interface){
+    const body = JSON.stringify(iface);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createInterface',body,{
+      headers:headers
+    });
+  }
+
+  getInterfaces(){
+    return this.http.get('http://localhost:8080/fsm/getInterfaces');
+  }
+
+  machineSupportInterfaces(machine:Machine){
+    const body = JSON.stringify(machine);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/machineSupportInterfaces',body,{
       headers:headers
     });
   }

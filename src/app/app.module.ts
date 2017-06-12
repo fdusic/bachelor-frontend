@@ -22,6 +22,7 @@ import { RegistrationReportsComponent } from './components/registration-reports/
 import { AddSectionComponent } from './components/forms/add-section/add-section.component';
 import { SectionDetailComponent } from './components/section-detail/section-detail.component';
 import { UpdateSectionComponent } from './components/forms/update-section/update-section.component';
+import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { UpdateSectionComponent } from './components/forms/update-section/update
     RegistrationReportsComponent,
     AddSectionComponent,
     SectionDetailComponent,
-    UpdateSectionComponent
+    UpdateSectionComponent,
+    AddMachineComponent
   ],
   imports: [
     BrowserModule,
