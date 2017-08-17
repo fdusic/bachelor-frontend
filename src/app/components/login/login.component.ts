@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {NgForm} from "@angular/forms";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {User} from "../../beans/user";
 import {LoginRegisterService} from "../../services/login-register.service";
+import {RoleService} from "../../services/role.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   private loginFailed:boolean = false;
 
-  constructor(private router:Router, private httpService : LoginRegisterService) { }
+  constructor(private router:Router, private httpService : LoginRegisterService, private roleService : RoleService) { }
 
   ngOnInit() {
   }
@@ -23,8 +23,9 @@ export class LoginComponent implements OnInit {
       data => {
         if(data['_body'] == 'no user' || data['_body'] == 'wrong password')
           this.loginFailed = true;
-        else
+        else {
           this.router.navigateByUrl('/home');
+        }
       }
     );
   }

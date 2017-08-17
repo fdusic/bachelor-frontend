@@ -25,6 +25,7 @@ import { UpdateSectionComponent } from './components/forms/update-section/update
 import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 import { UpdateMachineComponent } from './components/forms/update-machine/update-machine.component';
 import { FailureReportsComponent } from './components/failure-reports/failure-reports.component';
+import {RoleService} from "./services/role.service";
 import { TopologyComponent } from './components/topology/topology.component';
 
 @NgModule({
@@ -54,7 +55,7 @@ import { TopologyComponent } from './components/topology/topology.component';
     HttpModule,
     routing
   ],
-  providers: [FSMService, LoginRegisterService],
+  providers: [FSMService, LoginRegisterService, RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
