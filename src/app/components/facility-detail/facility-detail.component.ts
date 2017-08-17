@@ -13,6 +13,7 @@ export class FacilityDetailComponent implements OnInit {
 
 
   private facility:Facility = new Facility();
+  private sections:Section[]=[];
 
   constructor(private fsmService:FSMService,private router:Router,private activatedRoute:ActivatedRoute) { }
 
@@ -20,6 +21,11 @@ export class FacilityDetailComponent implements OnInit {
     this.fsmService.getFacilityById(this.activatedRoute.snapshot.params['idF']).subscribe(
       (data) => {
         this.facility = JSON.parse(data['_body']);
+        this.fsmService.getSectionByFacility(this.facility).subscribe(
+          (data) => {
+            this.sections = JSON.parse(data['_body']);
+          }
+        );
       }
     );
 

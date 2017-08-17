@@ -25,6 +25,7 @@ import { UpdateSectionComponent } from './components/forms/update-section/update
 import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 import { UpdateMachineComponent } from './components/forms/update-machine/update-machine.component';
 import { FailureReportsComponent } from './components/failure-reports/failure-reports.component';
+import { TopologyComponent } from './components/topology/topology.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FailureReportsComponent } from './components/failure-reports/failure-re
     UpdateSectionComponent,
     AddMachineComponent,
     UpdateMachineComponent,
-    FailureReportsComponent
+    FailureReportsComponent,
+    TopologyComponent
   ],
   imports: [
     BrowserModule,
