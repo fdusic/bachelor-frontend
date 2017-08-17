@@ -20,7 +20,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createFacility',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -29,7 +29,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/updateFacility',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -37,19 +37,19 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/deleteFacility',idF,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
   getFacilities(){
-    return this.http.get('http://localhost:8080/fsm/getFacilities');
+    return this.http.get('http://localhost:8080/fsm/getFacilities', {withCredentials : true});
   }
 
   getFacilityById(idF:number){
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/getFacilityById',idF,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -62,7 +62,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/getSectionById',idS,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -72,7 +72,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/getSectionByFacility',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -82,7 +82,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createSection',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -90,7 +90,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/deleteSection',idS,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -100,7 +100,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/updateSection',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -116,7 +116,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/getMachineById',idM,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -125,7 +125,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/getMachinesBySection',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -134,7 +134,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/deleteMachine',idM,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -146,12 +146,12 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createInterface',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
   getInterfaces(){
-    return this.http.get('http://localhost:8080/fsm/getInterfaces');
+    return this.http.get('http://localhost:8080/fsm/getInterfaces', {withCredentials : true});
   }
 
   machineSupportInterfaces(machine:Machine){
@@ -159,7 +159,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/machineSupportInterfaces',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -170,12 +170,12 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createFailureReport',JSON.stringify(rf),{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
   getFailureReports(){
-    return this.http.get('http://localhost:8080/fsm/getFailureReports');
+    return this.http.get('http://localhost:8080/fsm/getFailureReports', {withCredentials : true});
   }
 
   fixed(r){
@@ -183,7 +183,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/fixed',JSON.stringify(r),{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -194,12 +194,12 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createConnectionType',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
   getConnectionTypes(){
-    return this.http.get('http://localhost:8080/fsm/getConnectionTypes');
+    return this.http.get('http://localhost:8080/fsm/getConnectionTypes', {withCredentials : true});
   }
 
 
@@ -209,7 +209,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createTopology',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 
@@ -218,7 +218,7 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/createMachinesInTopology',body,{
-      headers:headers
+      headers:headers, withCredentials : true
     });
   }
 

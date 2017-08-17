@@ -79,6 +79,7 @@ export class SectionDetailComponent implements OnInit {
     );
   }
 
+
   assignMachineForDetails(machine:Machine) {
     this.machineForDetails = machine;
   }
@@ -120,8 +121,17 @@ export class SectionDetailComponent implements OnInit {
           document.getElementById('closeConnectionTypeButton').click();
         }
       );
+  }
 
+  onSubmitInterface(iface:Interface, form:NgForm){
 
+    this.fsmService.createInterface(iface).subscribe(
+      (data) => {
+        this.interfaces.push(JSON.parse(data['_body']));
+        document.getElementById("closeInterfaceModalButton").click();
+        form.reset();
+      }
+    );
 
   }
 

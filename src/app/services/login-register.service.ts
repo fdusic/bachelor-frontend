@@ -24,13 +24,13 @@ export class LoginRegisterService {
   }
 
   getRegistrationReports(){
-    return this.http.get(this.path + 'getRegistrationReports');
+    return this.http.get(this.path + 'getRegistrationReports',{withCredentials : true});
   }
 
   register(rr : RegistrationReport){
     const headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post(this.path + 'register', JSON.stringify(rr), { headers : headers});
+    return this.http.post(this.path + 'register', JSON.stringify(rr), { headers : headers, withCredentials : true});
   }
 
 }
