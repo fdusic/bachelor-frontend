@@ -69,12 +69,13 @@ export class AddMachineComponent implements OnInit {
   }
 
 
-  onSubmitInterface(iface:Interface){
+  onSubmitInterface(iface:Interface, form:NgForm){
 
     this.fsmService.createInterface(iface).subscribe(
       (data) => {
         this.interfaces.push(JSON.parse(data['_body']));
         document.getElementById("closeInterfaceModalButton").click();
+        form.reset();
       }
     );
 

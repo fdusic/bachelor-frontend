@@ -29,6 +29,7 @@
           <li> <a href="#tab_default_2" data-toggle="tab"> Machines </a> </li>
           <li> <a href="#tab_default_3" data-toggle="tab"> Topology </a> </li>
           <li> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
+          <li> <a href="#tab_default_6" data-toggle="tab"> Interfaces </a> </li>
           <li> <a href="#tab_default_5" data-toggle="tab"> Connection types </a> </li>
         </ul>
         <div class="tab-content margin-tops">
@@ -139,6 +140,31 @@
                   <td>{{contype.name}}</td>
                   <td>{{contype.description}}</td>
                   <td>{{contype.iface.name}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_default_6">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/s_interfaces.jpg" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <a data-toggle="modal" data-target="OVDE INTERFACE" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Interface <span class="glyphicon glyphicon-plus"></span></a>
+              <hr>
+              <label align="left">Interfaces:</label>
+              <table class="table table-hover table-inverse" id="interfacesTable">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
                 </tr>
                 </tbody>
               </table>
