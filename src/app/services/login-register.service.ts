@@ -16,11 +16,19 @@ export class LoginRegisterService {
     return this.http.post(this.path + "login", JSON.stringify(user), { headers :  headers, withCredentials : true });
   }
 
+  logout() {
+    return this.http.get(this.path + 'logout', {withCredentials : true});
+  }
+
   createRegistrationReport(rr : any){
     delete rr.password_r;
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post(this.path + "createRegistrationReport", JSON.stringify(rr), { headers :  headers, withCredentials : true });
+  }
+
+  getLogedUser(){
+    return this.http.get(this.path + "getLogedUser", {withCredentials : true });
   }
 
   getRegistrationReports(){
