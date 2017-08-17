@@ -69,6 +69,7 @@ export class SectionDetailComponent implements OnInit {
     let rf = new FailureReport();
     rf.error = this.textarea.nativeElement.value;
     rf.machine = this.m;
+    console.log(rf);
     this.fsmService.createFailureReport(rf).subscribe(
       () => {}
     );
