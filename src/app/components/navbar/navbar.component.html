@@ -41,7 +41,7 @@
             <li><a href="#">Another action</a></li>
             <li><a [routerLink]="['/home/registrationreport']">Registration report</a></li>
             <li role="separator" class="divider"></li>
-            <li><a [routerLink]="['/']">Logout</a></li>
+            <li><a (click)="logout()">Logout</a></li>
           </ul>
         </li>
       </ul>
