@@ -5,7 +5,6 @@ export class Facility{
   public name:string;
   public address:string;
   public surface:number;
-  public sections:Section[]=[];
 
   constructor(){}
 

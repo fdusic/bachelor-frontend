@@ -1,0 +1,94 @@
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1 class="facility-title">New topology</h1>
+    <p style="color: #7ac3fe">Place machines as you wish...</p>
+  </div>
+</div>
+<hr>
+
+<div class="container" id="machinesContainer">
+  <h3>Select machines for topology:</h3>
+  <div class="row">
+    <!-- BEGIN MACHINES -->
+    <div style="height: 300px" class="col-md-3 col-sm-6" *ngFor="let machine of machines">
+    		<span id="{{'span'+machine.idM}}" class="thumbnail text-center">
+      			<img style="width: 140px;height: 110px" src="{{'./images/' + machine.idM + machine.image}}" alt="...">
+      			<h4 class="text-danger">Machine details:</h4>
+      			<p>idM: {{machine.idM}}</p>
+      			<p>Name: {{machine.name}}</p>
+      			<p>Description: {{machine.description}}</p>
+      			<hr class="line">
+      			<div class="row">
+      					<a id="{{'as'+machine.idM}}" (click)="selectMachine(machine)" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Select <span class="glyphicon glyphicon-ok"></span></a>
+                <a id="{{'au'+machine.idM}}" (click)="unselectMachine(machine)" style="display: none" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Unselect <span class="glyphicon glyphicon-remove"></span></a>
+      			</div>
+    		</span>
+    </div>
+    <!-- END MACHINES -->
+  </div>
+
+  <br>
+  <br>
+
+
+  <div class="row" align="center">
+    <a (click)="onNext()" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Next <span class="glyphicon glyphicon-play"></span></a>
+  </div>
+  <hr>
+</div>
+
+
+<div class="container-fluid" id="topologyDiv" style="display: none">
+  <label align="left">Topology:</label>
+  <table class="table table-hover table-inverse" id="topologyTable">
+    <thead>
+    <tr>
+      <th>idI</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Version</th>
+      <th>Author</th>
+      <th>Section</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{topology.idT}}</td>
+      <td>{{topology.name}}</td>
+      <td>{{topology.description}}</td>
+      <td>{{topology.version}}</td>
+      <td>{{topology.author.username}}</td>
+      <td>{{topology.section.name}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <label align="left">Machines in topology:</label>
+  <table class="table table-hover table-inverse" id="mitTable">
+    <thead>
+    <tr *ngFor="let mit of machinesInTopology">
+      <th>idMT</th>
+      <th>Description</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Machine</th>
+      <th>Topology</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{mit.idMT}}</td>
+      <td>{{mit.description}}</td>
+      <td>{{mit.X}}</td>
+      <td>{{mit.Y}}</td>
+      <td>{{mit.machine.name}}</td>
+      <td>{{mit.topology.idT}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+

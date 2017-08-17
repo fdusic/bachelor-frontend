@@ -5,6 +5,9 @@ import {Section} from "../beans/section";
 import {Interface} from "../beans/interface";
 import {Machine} from "../beans/machine";
 import {FailureReport} from "../beans/failureReport";
+import {ConnectionType} from "../beans/connection-type";
+import {Topology} from "../beans/topology";
+import {MachineInTopology} from "../beans/machine-in-topology";
 
 @Injectable()
 export class FSMService {
@@ -59,6 +62,16 @@ export class FSMService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post('http://localhost:8080/fsm/getSectionById',idS,{
+      headers:headers
+    });
+  }
+
+
+  getSectionByFacility(facility:Facility){
+    const body = JSON.stringify(facility);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getSectionByFacility',body,{
       headers:headers
     });
   }
@@ -174,5 +187,39 @@ export class FSMService {
     });
   }
 
+
+  //KRUD ZA CONNECTION TYPE
+  createConnectionType(connectionType:ConnectionType){
+    const body = JSON.stringify(connectionType);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createConnectionType',body,{
+      headers:headers
+    });
+  }
+
+  getConnectionTypes(){
+    return this.http.get('http://localhost:8080/fsm/getConnectionTypes');
+  }
+
+
+  //KRUD ZA TOPOLOGIJU
+  createTopology(topology:Topology){
+    const body = JSON.stringify(topology);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createTopology',body,{
+      headers:headers
+    });
+  }
+
+  createMachinesInTopology(mts:MachineInTopology[]){
+    const body = JSON.stringify(mts);
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createMachinesInTopology',body,{
+      headers:headers
+    });
+  }
 
 }

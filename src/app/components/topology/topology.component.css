@@ -1,0 +1,65 @@
+.facility-title{
+  font-family: 'Brush Script MT', cursive;
+  font-size: 85px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 120px;
+  color: #7ac3fe;
+}
+
+.jumbotron {
+  background-image: url("../../../images/top.jpg");
+  background-size: cover;}
+
+.thumbnail:hover{
+  opacity:1.00;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: box-shadow 0.5s;
+
+}
+
+
+/*dadadas*/
+
+.a_btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+  -moz-user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size:14px;
+  line-height:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  padding:8px 20px;
+}
+
+.btn-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.btn-outlined.btn-black {
+  background: none;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-outlined.btn-black:hover,
+.btn-outlined.btn-black:active {
+  color: #FFF;
+  background: #000000;
+  border-color: #000000;
+}
+
+/*dadasdas*/

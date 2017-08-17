@@ -16,11 +16,13 @@ import {UpdateSectionComponent} from "./components/forms/update-section/update-s
 import {AddMachineComponent} from "./components/forms/add-machine/add-machine.component";
 import {UpdateMachineComponent} from "./components/forms/update-machine/update-machine.component";
 import {FailureReportsComponent} from "./components/failure-reports/failure-reports.component";
+import {TopologyComponent} from "./components/topology/topology.component";
 
 const APP_ROUTES: Routes = [
   {path:'home',component:HomeComponent, children:[
     {path:'addsection/:idF',component:AddSectionComponent},
     {path:'updatemachine/:idM',component:UpdateMachineComponent},
+    {path:'addtopology/:idS',component:TopologyComponent},
     {path:'addmachine/:idS',component:AddMachineComponent},
     {path:'addfacility', component:AddFacilityComponent},
     {path:'sections/update/:idS', component:UpdateSectionComponent},

@@ -29,6 +29,8 @@
           <li> <a href="#tab_default_2" data-toggle="tab"> Machines </a> </li>
           <li> <a href="#tab_default_3" data-toggle="tab"> Topology </a> </li>
           <li> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
+          <li> <a href="#tab_default_6" data-toggle="tab"> Interfaces </a> </li>
+          <li> <a href="#tab_default_5" data-toggle="tab"> Connection types </a> </li>
         </ul>
         <div class="tab-content margin-tops">
 
@@ -90,6 +92,8 @@
               <div class="row"> <img src="./images/sd-topology.png" class="img-responsive"> </div>
             </div>
             <div class="col-md-8">
+              <a [routerLink]="['/home/addtopology',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Topology <span class="glyphicon glyphicon-plus"></span></a>
+              <hr>
               <h4 class="heading4">Shopify Product Upload </h4>
               <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
               <h4 class="heading4">Shopify Product Upload </h4>
@@ -111,6 +115,60 @@
               <a href="#">
                 <div class="btns">View More <i class="fa fa-angle-right"></i></div>
               </a> </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_default_5">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/contype.jpeg" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <a data-toggle="modal" data-target="#connectionTypeModal" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Type <span class="glyphicon glyphicon-plus"></span></a>
+              <hr>
+              <label align="left">Connection types:</label>
+              <table class="table table-hover table-inverse" id="connectionTypeTable">
+                <thead>
+                <tr>
+                  <th>idCT</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Interface</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let contype of connectionTypes">
+                  <td>{{contype.idCT}}</td>
+                  <td>{{contype.name}}</td>
+                  <td>{{contype.description}}</td>
+                  <td>{{contype.iface.name}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="tab_default_6">
+            <div class="col-md-4">
+              <div class="row"> <img src="./images/s_interfaces.jpg" class="img-responsive"> </div>
+            </div>
+            <div class="col-md-8">
+              <a data-toggle="modal" data-target="OVDE INTERFACE" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Interface <span class="glyphicon glyphicon-plus"></span></a>
+              <hr>
+              <label align="left">Interfaces:</label>
+              <table class="table table-hover table-inverse" id="interfacesTable">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
         </div>
@@ -180,6 +238,50 @@
           <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
           <button class="btn btn-primary" data-dismiss="modal" (click)="deleteMachine()"><span class="glyphicon glyphicon-check"></span> Delete</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="connectionTypeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="closeConnectionTypeButton" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="lineModalLabel">Connection type form</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitConnectionType(fff)" ngNativeValidate #fff="ngForm">
+          <div class="form-group">
+            <label for="ctname">Name</label>
+            <input type="text" class="form-control" required ngModel name="name" id="ctname" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="ctdescription">Description</label>
+            <textarea class="form-control" id="ctdescription" name="description" required ngModel placeholder="Description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="interface">Interface</label>
+            <select ngModel required name="interface" id="interface" class="form-control">
+              <option disabled selected value> -- select interface -- </option>
+              <option *ngFor="let ifaces of interfaces">{{'idI:'+ifaces.idI + ' '+ 'Name:'+ifaces.name}}</option>
+            </select>
+          </div>
+
+          <div class="modal-footer">
+            <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Close</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="submit" id="submitInterfaceButton" class="btn btn-primary btn-hover-green" data-action="save" role="button">Save</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>

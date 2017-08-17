@@ -4,6 +4,9 @@ import {FSMService} from "../../services/fsm.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Machine} from "../../beans/machine";
 import {FailureReport} from "../../beans/failureReport";
+import {Interface} from "../../beans/interface";
+import {NgForm} from "@angular/forms";
+import {ConnectionType} from "../../beans/connection-type";
 
 @Component({
   selector: 'app-section-detail',
@@ -16,10 +19,13 @@ export class SectionDetailComponent implements OnInit {
   private machines:Machine[]=[];
   private machineForDelete:Machine = new Machine();
   private machineForDetails:Machine = new Machine();
+  private interfaces:Interface[]=[];
+  private connectionTypes:ConnectionType[]=[];
 
   @ViewChild("textarea") textarea : any;
 
-  private m : Machine;
+  private m : Machine= new Machine();
+
 
   constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router) { }
 
@@ -33,6 +39,18 @@ export class SectionDetailComponent implements OnInit {
             this.machines = JSON.parse(data['_body']);
           }
         );
+      }
+    );
+
+    this.fsmService.getInterfaces().subscribe(
+      (data) => {
+        this.interfaces = JSON.parse(data['_body']);
+      }
+    );
+
+    this.fsmService.getConnectionTypes().subscribe(
+      (data) => {
+        this.connectionTypes = JSON.parse(data['_body']);
       }
     );
   }
@@ -77,6 +95,34 @@ export class SectionDetailComponent implements OnInit {
 
   setSelected(m){
     this.m = m;
+  }
+
+  onSubmitConnectionType(form:NgForm){
+      let ct:ConnectionType = new ConnectionType();
+      ct.name = form.controls['name'].value;
+      ct.description = form.controls['description'].value;
+
+      let temp:string = form.controls['interface'].value;
+      let s1:string = temp.split(' ')[0];
+      let s2:string = s1.split(':')[1];
+
+      for(var i = 0;i < this.interfaces.length; i++){
+        if(parseInt(s2) == this.interfaces[i].idI){
+          ct.iface = this.interfaces[i];
+          break;
+        }
+      }
+
+      this.fsmService.createConnectionType(ct).subscribe(
+        (data) => {
+          let ct1:ConnectionType = JSON.parse(data['_body']);
+          this.connectionTypes.push(ct1);
+          document.getElementById('closeConnectionTypeButton').click();
+        }
+      );
+
+
+
   }
 
 }
