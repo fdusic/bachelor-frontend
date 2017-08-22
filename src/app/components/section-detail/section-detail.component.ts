@@ -7,6 +7,7 @@ import {FailureReport} from "../../beans/failureReport";
 import {Interface} from "../../beans/interface";
 import {NgForm} from "@angular/forms";
 import {ConnectionType} from "../../beans/connection-type";
+import {RoleService} from "../../services/role.service";
 
 @Component({
   selector: 'app-section-detail',
@@ -26,8 +27,7 @@ export class SectionDetailComponent implements OnInit {
 
   private m : Machine= new Machine();
 
-
-  constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router) { }
+  constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router, private roleService: RoleService) { }
 
   ngOnInit() {
 

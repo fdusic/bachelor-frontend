@@ -59,7 +59,7 @@
         <span>{{rr.email}}</span>
         <span>{{rr.phone}}</span>
         <span>{{rr.proffesion}}</span>
-        <span><a class="btn btn-default btn-sm" (click)="register(rr)">Approve <span class="glyphicon glyphicon-ok"></span></a></span>
+        <span><button *ngIf="roleService.role == 'ADMIN'" class="btn btn-default btn-sm" (click)="register(rr)">Approve <span class="glyphicon glyphicon-ok"></span></button></span>
       </li>
 
       <li>
