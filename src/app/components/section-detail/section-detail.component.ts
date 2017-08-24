@@ -8,6 +8,10 @@ import {Interface} from "../../beans/interface";
 import {NgForm} from "@angular/forms";
 import {ConnectionType} from "../../beans/connection-type";
 import {RoleService} from "../../services/role.service";
+import {Process} from "../../beans/process";
+import {ProcessService} from "../../services/process.service";
+import {Topology} from "../../beans/topology";
+import {TopologyService} from "../../services/topology.service";
 
 @Component({
   selector: 'app-section-detail',
@@ -27,7 +31,16 @@ export class SectionDetailComponent implements OnInit {
 
   private m : Machine= new Machine();
 
-  constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router, private roleService: RoleService) { }
+  /* PROCESS VARIABLES */
+  private processes : Process[] = [];
+  /* PROCESS VARIABLES END! */
+
+  /* TOPOLOGY VARIABLES */
+  private topologies : Topology[] = [];
+  /* TOPOLOGY VARIABLES END! */
+
+  constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router, private roleService: RoleService,
+                    private processService : ProcessService, private topologyService : TopologyService) { }
 
   ngOnInit() {
 
@@ -53,8 +66,26 @@ export class SectionDetailComponent implements OnInit {
         this.connectionTypes = JSON.parse(data['_body']);
       }
     );
+
+    this.processService.getProcessesForSection(this.activatedRoute.snapshot.params['idS']).subscribe(
+      (data) => {
+        this.processes = JSON.parse(data['_body']);
+      }
+    );
+
+    this.topologyService.getTopologiesForSection(this.activatedRoute.snapshot.params['idS']).subscribe(
+      (data) => {
+        this.topologies = JSON.parse(data['_body']);
+      }
+    );
+
   }
 
+  /* PROCESS METHODS */
+  /* PROCESS METHODS END! */
+
+  /* TOPOLOGY METHODS */
+  /* TOPOLOGY METHODS END! */
 
   deleteSection(){
     this.fsmService.deleteSection(this.section.idS).subscribe(
