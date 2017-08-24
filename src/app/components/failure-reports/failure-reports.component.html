@@ -25,7 +25,7 @@
       <td>{{r.employee.username}}</td>
       <td>{{r.repairer.username}}</td>
       <td>{{r.dateCreated}}</td>
-      <td><button *ngIf="roleService.role == 'REPAIRER'" type="button" class="btn btn-default btn-sm" (click)="fixed(r)"><span class="glyphicon glyphicon-ok"></span> Fixed</button></td>
+      <td><button type="button" class="btn btn-default btn-sm" (click)="fixed(r)"><span class="glyphicon glyphicon-ok"></span> Fixed</button></td>
     </tr>
     </tbody>
   </table>

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {RegistrationReport} from "../../beans/registrationReport";
 import {LoginRegisterService} from "../../services/login-register.service";
-import {RoleService} from "../../services/role.service";
 
 
 @Component({
@@ -13,7 +12,7 @@ export class RegistrationReportsComponent implements OnInit {
 
   private registrationReports : RegistrationReport[] = [];
 
-  constructor(private loginRegisterService : LoginRegisterService, private roleService : RoleService){ }
+  constructor(private loginRegisterService : LoginRegisterService){ }
 
   ngOnInit() {
     this.loginRegisterService.getRegistrationReports().subscribe(

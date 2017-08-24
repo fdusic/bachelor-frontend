@@ -14,7 +14,7 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li routerLinkActive="active" class="dropdown">
+        <li routerLinkActive="active" class="dropdown" *ngIf="roleService.role == 'MANAGER' || roleService.role == 'EXPERT' || roleService.role == 'EMPLOYEE'">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facilities <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li *ngIf="roleService.role == 'MANAGER'" routerLinkActive="active"><a [routerLink]="['/home/addfacility']">Create New</a></li>
@@ -25,8 +25,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li *ngIf="roleService.role == 'MANAGER'" routerLinkActive="active"><a [routerLink]="['/home/registrationreport']">New Registration</a></li>
-            <li *ngIf="roleService.role == 'ADMIN' || roleService.role == 'MANAGER'" routerLinkActive="active"><a [routerLink]="['/home/registrationReports']">View Registrations</a></li>
-            <li *ngIf="roleService.role == 'REPAIRER' || roleService.role == 'MANAGER'" routerLinkActive="active"><a [routerLink]="['/home/failureReports']">View Failures</a></li>
+            <li *ngIf="roleService.role == 'ADMIN'" routerLinkActive="active"><a [routerLink]="['/home/registrationReports']">View Registrations</a></li>
+            <li *ngIf="roleService.role == 'REPAIRER'" routerLinkActive="active"><a [routerLink]="['/home/failureReports']">View Failures</a></li>
           </ul>
         </li>
       </ul>

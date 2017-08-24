@@ -19,9 +19,9 @@ export class FSMService {
   createFacility(facility: Facility) {
     const body = JSON.stringify(facility);
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/createFacility', body, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createFacility',body,{
+      headers:headers, withCredentials : true
     });
   }
 
@@ -48,12 +48,11 @@ export class FSMService {
 
   getFacilityById(idF: number) {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/getFacilityById', idF, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getFacilityById',idF,{
+      headers:headers, withCredentials : true
     });
   }
-
 
   ///////////////////
   //CRUD ZA SECTION
@@ -70,9 +69,9 @@ export class FSMService {
   getSectionByFacility(facility: Facility) {
     const body = JSON.stringify(facility);
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/getSectionByFacility', body, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getSectionByFacility',body,{
+      headers:headers, withCredentials : true
     });
   }
 
@@ -80,17 +79,17 @@ export class FSMService {
   createSection(section: Section) {
     const body = JSON.stringify(section);
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/createSection', body, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/createSection',body,{
+      headers:headers, withCredentials : true
     });
   }
 
   deleteSection(idS: number) {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/deleteSection', idS, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/deleteSection',idS,{
+      headers:headers, withCredentials : true
     });
   }
 
@@ -98,9 +97,9 @@ export class FSMService {
   updateSection(section: Section) {
     const body = JSON.stringify(section);
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/updateSection', body, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/updateSection',body,{
+      headers:headers, withCredentials : true
     });
   }
 
@@ -114,27 +113,27 @@ export class FSMService {
 
   getMachineById(idM: number) {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/getMachineById', idM, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getMachineById',idM,{
+      headers:headers, withCredentials : true
     });
   }
 
   getMachinesBySection(section: Section) {
     const body = JSON.stringify(section);
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/getMachinesBySection', body, {
-      headers: headers, withCredentials: true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/getMachinesBySection',body,{
+      headers:headers, withCredentials : true
     });
   }
 
 
   deleteMachine(idM: number) {
     const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/deleteMachine', idM, {
-      headers: headers, withCredentials : true
+    headers.append('Content-Type','application/json');
+    return this.http.post('http://localhost:8080/fsm/deleteMachine',idM,{
+      headers:headers, withCredentials : true
     });
   }
 
