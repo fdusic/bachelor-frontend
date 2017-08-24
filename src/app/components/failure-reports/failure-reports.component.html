@@ -15,7 +15,6 @@
     <th>Machine</th>
     <th>Problem</th>
     <th>Employee</th>
-    <th>Repairer</th>
     <th>Date</th>
     <th>Options</th>
   </tr>
@@ -25,7 +24,7 @@
     <td>{{r.machine.name}}</td>
     <td>{{r.error}}</td>
     <td>{{r.employee.username}}</td>
-    <td>{{r.repairer.username}}</td>
+    <td>{{r.dateCreated | date}}</td>
     <td><button (click)="fixed(r)" type="button" class="btn btn-default btn-sm">Approve <span class="glyphicon glyphicon-ok"></span></button></td>
   </tr>
   </tbody>
