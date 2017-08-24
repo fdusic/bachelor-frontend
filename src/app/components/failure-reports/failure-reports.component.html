@@ -1,32 +1,33 @@
-<div class="jumbotron">
+<div class="jumbotron" style="border-bottom: 1px solid black">
   <div class="container text-center">
     <h1 class="facility-title">Failure reports</h1>
-    <p style="color: #bafffd">Machines not fixed</p>
+    <p style="color: white">Broken machines...</p>
   </div>
 </div>
 
 
-<div class="container-fluid bg-3 text-left">
-  <table class="table table-hover table-inverse" id="facilitiesTable">
-    <thead>
-    <tr>
-      <th>Machine</th>
-      <th>Problem</th>
-      <th>Employee</th>
-      <th>Repairer</th>
-      <th>Date</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let r of reports">
-      <td>{{r.machine.name}}</td>
-      <td>{{r.error}}</td>
-      <td>{{r.employee.username}}</td>
-      <td>{{r.repairer.username}}</td>
-      <td>{{r.dateCreated}}</td>
-      <td><button type="button" class="btn btn-default btn-sm" (click)="fixed(r)"><span class="glyphicon glyphicon-ok"></span> Fixed</button></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<table class="table table-bordered">
+  <caption style="background-color: lightgrey; border: 1px solid black">
+    <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Table of reports</h3>
+  </caption>
+  <thead>
+  <tr>
+    <th>Machine</th>
+    <th>Problem</th>
+    <th>Employee</th>
+    <th>Repairer</th>
+    <th>Date</th>
+    <th>Options</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="rows" *ngFor="let r of reports">
+    <td>{{r.machine.name}}</td>
+    <td>{{r.error}}</td>
+    <td>{{r.employee.username}}</td>
+    <td>{{r.repairer.username}}</td>
+    <td><button (click)="fixed(r)" type="button" class="btn btn-default btn-sm">Approve <span class="glyphicon glyphicon-ok"></span></button></td>
+  </tr>
+  </tbody>
+</table>
+

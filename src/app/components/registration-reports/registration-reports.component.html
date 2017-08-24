@@ -1,72 +1,46 @@
-<div class="jumbotron">
+<div class="jumbotron" style="border-bottom: 1px solid black">
   <div class="container text-center">
     <h1 class="report-title">Registration reports</h1>
-    <p style="color: #3d57de">New people have joined our team</p>
+    <p style="color: white">New people have joined our team</p>
   </div>
 </div>
 
 
-<!--<div class="container-fluid bg-3 text-left">-->
-  <!--<table class="table table-hover table-inverse" id="facilitiesTable">-->
-    <!--<thead>-->
-    <!--<tr>-->
-      <!--<th>Username</th>-->
-      <!--<th>Name</th>-->
-      <!--<th>Surname</th>-->
-      <!--<th>Address</th>-->
-      <!--<th>Email</th>-->
-      <!--<th>Phone</th>-->
-      <!--<th>Proffesion</th>-->
-      <!--<th></th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr *ngFor="let rr of registrationReports">-->
-      <!--<td>{{rr.username}}</td>-->
-      <!--<td>{{rr.name}}</td>-->
-      <!--<td>{{rr.surname}}</td>-->
-      <!--<td>{{rr.address}}</td>-->
-      <!--<td>{{rr.email}}</td>-->
-      <!--<td>{{rr.phone}}</td>-->
-      <!--<td>{{rr.proffesion}}</td>-->
-      <!--<td><button type="button" class="btn btn-default btn-sm" (click)="register(rr)"><span class="glyphicon glyphicon-ok"></span> Approve</button></td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-  <!--</table>-->
-<!--</div>-->
-
-<div class="container-fluid facilities-list">
-
-  <div class="listWrap">
-
-    <ul class="list">
-
-      <li>
-        <span>Username</span>
-        <span>Name</span>
-        <span>Surname</span>
-        <span>Address</span>
-        <span>Email</span>
-        <span>Phone</span>
-        <span>Proffesion</span>
-        <span></span>
-      </li>
-      <li *ngFor="let rr of registrationReports">
-        <span>{{rr.username}}</span>
-        <span>{{rr.name}}</span>
-        <span>{{rr.surname}}</span>
-        <span>{{rr.address}}</span>
-        <span>{{rr.email}}</span>
-        <span>{{rr.phone}}</span>
-        <span>{{rr.proffesion}}</span>
-        <span><a class="btn btn-default btn-sm" (click)="register(rr)">Approve <span class="glyphicon glyphicon-ok"></span></a></span>
-      </li>
-
-      <li>
-
-      </li>
-    </ul>
-
-  </div>
-
+<div class="container" align="center">
+  <a [routerLink]="['/home/registrationreport']" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Report <span class="glyphicon glyphicon-plus"></span></a>
 </div>
+<hr>
+
+
+<table class="table table-bordered">
+  <caption style="background-color: lightgrey; border: 1px solid black">
+    <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Table of reports</h3>
+  </caption>
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Address</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Profession</th>
+    <th>Options</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="rows" *ngFor="let rr of registrationReports">
+    <td>{{rr.username}}</td>
+    <td>{{rr.name}}</td>
+    <td>{{rr.surname}}</td>
+    <td>{{rr.address}}</td>
+    <td>{{rr.email}}</td>
+    <td>{{rr.phone}}</td>
+    <td>{{rr.proffesion}}</td>
+    <td><button (click)="register(rr)" type="button" class="btn btn-default btn-sm">Approve <span class="glyphicon glyphicon-ok"></span></button></td>
+  </tr>
+  </tbody>
+</table>
+
+
+

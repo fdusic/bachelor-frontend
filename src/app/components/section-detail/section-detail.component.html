@@ -1,27 +1,36 @@
-<div class="jumbotron">
+<div class="jumbotron" style="border-bottom: 1px solid black">
   <div class="container text-center">
     <h1 class="facility-title">Section: {{section.name}}</h1>
-    <p style="color: #e5d05b">Just one section...</p>
+    <p style="color: white">Just one section...</p>
   </div>
 </div>
 <div class="container" align="center">
-  <a [routerLink]="['/home/addmachine',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Machine <span class="glyphicon glyphicon-plus"></span></a>
   <a class="a_btn btn-outlined btn-black btn-lg" data-toggle="modal" data-target="#confirmDeleteModal" data-wow-delay="0.7s">Delete <span class="glyphicon glyphicon-trash"></span></a>
   <a [routerLink]="['/home/sections/update',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Edit <span class="glyphicon glyphicon-list"></span></a>
-</div>
+  <div class="btn-group btn-group-primary">
+  <button data-toggle="dropdown" class="a_btn btn-outlined btn-black btn-lg dropdown-toggle" data-wow-delay="0.7s" type="button"><span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a [routerLink]="['/home/addmachine',section.idS]">New Machine</a></li>
+    <li><a data-toggle="modal" data-target="#interfaceModal">New Interface</a></li>
+    <li><a data-toggle="modal" data-target="#connectionTypeModal">New Protocol</a></li>
+    <li class="divider"></li>
+    <li><a href="#">New Topology</a></li>
+    <li><a href="#">New Process</a></li>
+  </ul>
+  </div>
 
+</div>
 
 <hr>
 
 
-
-
 <section class="home-content-top">
-  <div class="container">
+  <div class="container-fluid">
 
 
     <div class="clearfix"></div>
-    <h1 class="heading1">Welcome to section</h1>
+    <!--<h1 class="heading1">Welcome to section</h1>-->
     <div class="tabbable-panel margin-tops4 ">
       <div class="tabbable-line">
         <ul class="nav nav-tabs tabtop  tabsetting">
@@ -30,68 +39,71 @@
           <li> <a href="#tab_default_3" data-toggle="tab"> Topology </a> </li>
           <li> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
           <li> <a href="#tab_default_6" data-toggle="tab"> Interfaces </a> </li>
-          <li> <a href="#tab_default_5" data-toggle="tab"> Connection types </a> </li>
+          <li> <a href="#tab_default_5" data-toggle="tab"> Protocols </a> </li>
         </ul>
         <div class="tab-content margin-tops">
 
           <div class="tab-pane active fade in" id="tab_default_1">
-            <div class="col-md-4">
-              <div class="row"> <img src="./images/section-details.jpg" class="img-responsive"> </div>
-            </div>
-            <div class="col-md-8">
-              <div class="row" style="text-align: center">
-                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">idS:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.idS}}</strong>
+              <div class="container">
+                <table class="table table-bordered">
+                  <caption style="background-color: #84a3c0; border: 1px solid black">
+                    <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">The table presents information about the section</h3>
+                  </caption>
+                  <thead>
+                  <tr>
+                    <th>Column</th>
+                    <th>Value</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="rows">
+                    <th scope="row">ID</th>
+                    <td>{{section.idS}}</td>
+                  </tr>
+                  <tr class="rows">
+                    <th scope="row">Surface</th>
+                    <td><span class="label label-success">{{section.surface+' m2'}}</span></td>
+                  </tr>
+                  <tr class="rows">
+                    <th scope="row">Name</th>
+                    <td>{{section.name}}</td>
+                  </tr>
+                  <tr class="rows">
+                    <th scope="row">Description</th>
+                    <td>{{section.description}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="row" style="text-align: center">
-                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Name:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.name}}</strong>
-              </div>
-              <div class="row" style="text-align: center">
-                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Description:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.description}}</strong>
-              </div>
-              <div class="row" style="text-align: center">
-                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Surface:</label><strong style="font-family: Copperplate; font-size: 25px">  {{section.surface+' m2'}}</strong>
-              </div>
-              <div class="row" style="text-align: center">
-                <label style="font-family: Copperplate;color: #e5d05b; font-size: 25px" align="left">Machines:</label><strong style="font-family: Copperplate; font-size: 25px">  {{machines.length}}</strong>
-              </div>
-            </div>
           </div>
 
           <div class="tab-pane fade" id="tab_default_2">
-            <div class="col-md-4">
-              <div class="row"> <img src="./images/sd-machines.jpg" style="width: 100%;height: 100%" class="img-responsive"> </div>
-            </div>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let machine of machines">
-                  <div class="my-list" style="height: 250px">
-                    <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
-                    <h3>Machine: {{machine.name}}</h3>
-                    <span>Id: {{machine.idM}}</span>
-                    <span class="pull-right">Section: {{section.idS}}</span>
-                    <div class="offer">Description: {{machine.description}}</div>
-                    <div class="detail">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" *ngFor="let machine of machines">
+                    <div class="my-list" style="height: 250px; width: 150px">
                       <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
-                      <hr>
-                      <!--<div class="row" style="margin-bottom: 5px;display: none"><a [routerLink]="['/home/updatemachine',machine.idM]" title="Edit" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-list"></span></a></div>-->
-                      <div class="row" style="margin-bottom: 5px"><a class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s" data-toggle="modal" data-target="#sendReport" title="Report" (click)="setSelected(machine)"><span class="glyphicon glyphicon-wrench"></span></a> </div>
+                      <h3>Machine: {{machine.name}}</h3>
+                      <span>Id: {{machine.idM}}</span>
+                      <span class="pull-right">Section: {{section.idS}}</span>
+                      <div class="offer">Description: {{machine.description}}</div>
+                      <div class="detail">
+                        <img style="width: 100px;height: 70px" src="{{'./images/' + machine.idM + machine.image}}" alt="dsadas" />
+                        <hr>
+                        <div class="row" style="margin-bottom: 5px"><a class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s" data-toggle="modal" data-target="#sendReport" title="Report" (click)="setSelected(machine)"><span class="glyphicon glyphicon-wrench"></span></a> </div>
 
-                      <div class="row" style="margin-bottom: 5px"><a (click)="assignMachineForDelete(machine)" data-toggle="modal" data-target="#confirmMachineDeleteModal" title="Delete" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-trash"></span></a></div>
+                        <div class="row" style="margin-bottom: 5px"><a (click)="assignMachineForDelete(machine)" data-toggle="modal" data-target="#confirmMachineDeleteModal" title="Delete" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-trash"></span></a></div>
 
-                      <div class="row"><a data-toggle="modal" (click)="assignMachineForDetails(machine)" data-target="#machineDetailsModal" title="Details" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-zoom-in"></span></a></div>
+                        <div class="row"><a data-toggle="modal" (click)="assignMachineForDetails(machine)" data-target="#machineDetailsModal" title="Details" class="a_btn btn-outlined btn-black btn-sm" data-wow-delay="0.7s"><span class="glyphicon glyphicon-zoom-in"></span></a></div>
 
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
           </div>
 
           <div class="tab-pane fade" id="tab_default_3">
-            <div class="col-md-4">
-              <div class="row"> <img src="./images/sd-topology.png" class="img-responsive"> </div>
-            </div>
-            <div class="col-md-8">
               <a [routerLink]="['/home/addtopology',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Topology <span class="glyphicon glyphicon-plus"></span></a>
               <hr>
               <h4 class="heading4">Shopify Product Upload </h4>
@@ -100,77 +112,67 @@
               <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
               <a href="#">
                 <div class="btns">View More <i class="fa fa-angle-right"></i></div>
-              </a> </div>
+              </a>
           </div>
 
           <div class="tab-pane fade" id="tab_default_4">
-            <div class="col-md-4">
-              <div class="row"> <img src="./images/w_process.jpg" class="img-responsive"> </div>
-            </div>
-            <div class="col-md-8">
               <h4 class="heading4">OpenCart Product Upload</h4>
               <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
               <h4 class="heading4">OpenCart Product Upload</h4>
               <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
               <a href="#">
                 <div class="btns">View More <i class="fa fa-angle-right"></i></div>
-              </a> </div>
+              </a>
           </div>
 
           <div class="tab-pane fade" id="tab_default_5">
-            <div class="col-md-4">
-              <div class="row"> <img src="./images/contype.jpeg" class="img-responsive"> </div>
-            </div>
-            <div class="col-md-8">
-              <a data-toggle="modal" data-target="#connectionTypeModal" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Type <span class="glyphicon glyphicon-plus"></span></a>
-              <hr>
-              <label align="left">Connection types:</label>
-              <table class="table table-hover table-inverse" id="connectionTypeTable">
-                <thead>
-                <tr>
-                  <th>idCT</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Interface</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let contype of connectionTypes">
-                  <td>{{contype.idCT}}</td>
-                  <td>{{contype.name}}</td>
-                  <td>{{contype.description}}</td>
-                  <td>{{contype.iface.name}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+              <div class="container">
+                <table class="table table-bordered" id="connectionTypeTable">
+                  <caption style="background-color: #84a3c0; border: 1px solid black">
+                    <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">The table presents informations about the protocols</h3>
+                  </caption>
+                  <thead>
+                  <tr>
+                    <th>idCT</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Interface</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="rows" *ngFor="let contype of connectionTypes">
+                    <th scope="row">{{contype.idCT}}</th>
+                    <td>{{contype.name}}</td>
+                    <td>{{contype.description}}</td>
+                    <td>{{contype.iface.name}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
           </div>
 
           <div class="tab-pane fade" id="tab_default_6">
-            <div class="col-md-4">
-              <div class="row"> <img src="./images/s_interfaces.jpg" class="img-responsive"> </div>
-            </div>
-            <div class="col-md-8">
-              <a data-toggle="modal" data-target="#interfaceModal" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Interface <span class="glyphicon glyphicon-plus"></span></a>
-              <hr>
-              <label align="left">Interfaces:</label>
-              <table class="table table-hover table-inverse" id="interfacesTable">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let iface of interfaces">
-                  <td>{{iface.idI}}</td>
-                  <td>{{iface.name}}</td>
-                  <td>{{iface.description}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
+              <div class="container">
+                <table class="table table-bordered" id="interfacesTable">
+                  <caption style="background-color: #84a3c0; border: 1px solid black">
+                    <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">The table presents informations about the interfaces</h3>
+                  </caption>
+                  <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="rows" *ngFor="let iface of interfaces">
+                    <th scope="row">{{iface.idI}}</th>
+                    <td>{{iface.name}}</td>
+                    <td>{{iface.description}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
           </div>
 
         </div>

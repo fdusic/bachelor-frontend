@@ -1,7 +1,7 @@
-<div class="jumbotron">
+<div class="jumbotron" style="border-bottom: 1px solid black">
   <div class="container text-center">
     <h1 class="facility-title">Facility: {{facility.name}}</h1>
-    <p style="color: #b8b5c0">Take a look at our sections...</p>
+    <p style="color: white">Take a look at our sections...</p>
   </div>
 </div>
 <div class="container" align="center">
@@ -11,115 +11,68 @@
 </div>
 
 <hr>
-
-<div class="container">
-  <div class="row" style="text-align: left">
-    <label style="font-family: Copperplate; font-size: 30px" align="left">Facility details:</label>
+<div class="row" style="margin-right: 0.5px; margin-left: 0.5px">
+  <div class="col-lg-4" *ngIf="closeDetailsBool">
+    <table class="table table-bordered">
+      <caption style="background-color: #e8e8e8; border: 1px solid black">
+        <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Details</h3>
+      </caption>
+      <thead>
+      <tr>
+        <th>Column</th>
+        <th>Value</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="rows">
+          <th scope="row">ID</th>
+          <td>{{facility.idF}}</td>
+        </tr>
+        <tr class="rows">
+          <th scope="row">Surface</th>
+          <td><span class="label label-success">{{facility.surface+' m2'}}</span></td>
+        </tr>
+        <tr class="rows">
+          <th scope="row">Name</th>
+          <td>{{facility.name}}</td>
+        </tr>
+        <tr class="rows">
+          <th scope="row">Address</th>
+          <td>{{facility.address}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <td colspan="2"><button (click)="closeDetails()" class="btn btn-block btn-default">Close details <span class="glyphicon glyphicon-remove"></span></button></td>
+      </tfoot>
+    </table>
   </div>
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="offer offer-default">
-        <div class="shape">
-          <div class="shape-text">
-            <span class="glyphicon glyphicon glyphicon-eye-open"></span>
-          </div>
-        </div>
-        <div class="offer-content">
-          <h3 class="lead">
-            Id : <label class="label label-success"> <br>{{facility.idF}}</label>
-          </h3>
-
-
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="offer offer-default">
-        <div class="shape">
-          <div class="shape-text">
-            <span class="glyphicon glyphicon glyphicon-th"></span>
-          </div>
-        </div>
-        <div class="offer-content">
-          <h3 class="lead">
-            Surface : <label class="label label-success"> <br>{{facility.surface+' m2'}}</label>
-          </h3>
-
-
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="offer offer-radius offer-default">
-        <div class="shape">
-          <div class="shape-text">
-            <span class="glyphicon  glyphicon-user"></span>
-          </div>
-        </div>
-        <div class="offer-content">
-          <h3 class="lead">
-            Name : <label class="label label-success"> <br>{{facility.name}}</label>
-          </h3>
-
-        </div>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="offer offer-default">
-        <div class="shape">
-          <div class="shape-text">
-            <span class="glyphicon  glyphicon-home"></span>
-          </div>
-        </div>
-        <div class="offer-content">
-          <h3 class="lead">
-            Address : <label class="label label-success"> <br>{{facility.address}}</label>
-          </h3>
-        </div>
-      </div>
-    </div>
+  <div class="col-lg-8" id="sectionDiv">
+    <table class="table table-bordered">
+      <caption style="background-color: #e8e8e8; border: 1px solid black">
+        <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Table of sections</h3>
+      </caption>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Surface</th>
+        <th>Options</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="rows" *ngFor="let section of sections">
+        <th scope="row">{{section.idS}}</th>
+        <td>{{section.name}}</td>
+        <td>{{section.description}}</td>
+        <td><span class="label label-success">{{section.surface+' m2'}}</span></td>
+        <td><button [routerLink]="['/home/sections',section.idS]" type="button" class="btn btn-default btn-sm">More..</button></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-
-<br>
-
-<div class="container facilities-list">
-  <div class="row" style="text-align: left">
-    <label style="font-family: Copperplate; font-size: 30px" align="left">Sections:</label>
-  </div>
-  <br>
-
-  <div class="listWrap">
-
-    <ul class="list">
-
-      <li>
-        <span>ID</span>
-        <span>Name</span>
-        <span>Description</span>
-        <span>Surface</span>
-        <span>Actions</span>
-        <span></span>
-      </li>
-      <li *ngFor="let section of sections">
-        <span>{{section.idS}}</span>
-        <span>{{section.name}}</span>
-        <span>{{section.description}}</span>
-        <span><span class="label label-success">{{section.surface+' m2'}}</span></span>
-        <span><button [routerLink]="['/home/sections',section.idS]" type="button" class="btn btn-default btn-sm">More..</button></span>
-        <span></span>
-      </li>
-
-      <li>
-
-      </li>
-    </ul>
-
-  </div>
-
-</div>
 
 
 

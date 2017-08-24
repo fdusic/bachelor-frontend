@@ -1,7 +1,7 @@
-<div class="jumbotron">
+<div class="jumbotron" style="border-bottom: 1px solid black">
   <div class="container text-center">
     <h1 class="facility-title">Facilities</h1>
-    <p style="color: #b8b5c0">We have many facilities...</p>
+    <p style="color: white">We have many facilities...</p>
   </div>
 </div>
 
@@ -10,37 +10,34 @@
 </div>
 <hr>
 
-<div class="container-fluid facilities-list">
 
-  <div class="listWrap">
 
-    <ul class="list">
+<table class="table table-bordered">
+  <caption style="background-color: #d4c575; border: 1px solid black">
+    <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Table of facilities</h3>
+  </caption>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Surface</th>
+    <th>Options</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="rows" *ngFor="let facility of facilities">
+    <th scope="row">{{facility.idF}}</th>
+    <td>{{facility.name}}</td>
+    <td>{{facility.address}}</td>
+    <td><span class="label label-success">{{facility.surface+' m2'}}</span></td>
+    <td><button [routerLink]="['/home/facilities',facility.idF]" type="button" class="btn btn-default btn-sm">More..</button></td>
+  </tr>
+  </tbody>
+</table>
 
-      <li>
-        <span>ID</span>
-        <span>Name</span>
-        <span>Address</span>
-        <span>Surface</span>
-        <span>Actions</span>
-        <span></span>
-      </li>
-      <li *ngFor="let facility of facilities">
-        <span>{{facility.idF}}</span>
-        <span>{{facility.name}}</span>
-        <span>{{facility.address}}</span>
-        <span><span class="label label-success">{{facility.surface+' m2'}}</span></span>
-        <span><button [routerLink]="['/home/facilities',facility.idF]" type="button" class="btn btn-default btn-sm">More..</button></span>
-        <span></span>
-      </li>
 
-      <li>
 
-      </li>
-    </ul>
-
-  </div>
-
-</div>
 
 
 

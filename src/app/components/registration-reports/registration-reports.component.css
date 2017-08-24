@@ -1,130 +1,69 @@
 .jumbotron {
-  background-image: url("../../../images/illustrated-people.jpg");
+  background-image: url("../../../images/failure-report.svg");
   background-size: cover;
 }
 
 .report-title{
-  font-family: 'Brush Script MT', cursive;
+  font-family: 'Charoal';
   font-size: 85px;
   font-style: normal;
   font-variant: normal;
   font-weight: 500;
   line-height: 120px;
-  color: #3d57de;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+
+
+/*dsadasdas*/
+
+.rows:hover{
+  background-color: tomato;
 }
 
 
 /*dasdadasda*/
-.facilities-list {
-
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-
-}
 
 
-
-.list {
-
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: table;
-  white-space: nowrap;
-  width: 100%;
-
-}
-
-.list li {
-
-  background-color: #f0f0f0;
-  display: table-row;
-  color: #5c5c5c;
-
-}
-
-.list li:nth-child(odd) {
-
-  background-color: #f2f2f2;
-  display: table-row;
-  font-size: 9pt;
-  color: #5c5c5c;
-
-}
-
-.list li:nth-child(odd):hover {
-
-  background-color: #dadada;
-
-}
-
-.list li:nth-child(even) {
-
-  background-color: #e8e8e8;
-  display: table-row;
-  font-size: 9pt;
-  color: #5c5c5c;
-
-}
-
-.list li:nth-child(even):hover {
-
-  background-color: #dadada;
-
-}
-
-.list li:nth-child(1) span:first-child {
-
-  border-top-left-radius: 6px;
-
-}
-
-.list li:nth-child(1) span:last-child {
-
-  border-top-right-radius: 6px;
-
-}
-
-
-.list li:nth-child(1) {
-
-  background-color: #3d57de;
-  text-transform: uppercase;
-  font-size: 8pt;
-  font-weight: bold;
-  color: #b8b5c0;
-
-
-}
-
-.list li:nth-child(1):hover {
-
-
-
-}
-
-
-
-.list li:nth-child(1) span {
-
-  border-bottom: 2px solid #3d57de;
-  padding: 14px;
-
-}
-
-.list span {
-
-  text-align: left;
-  display: table-cell;
-  padding: 6px;
+.a_btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+  -moz-user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
   vertical-align: middle;
+  white-space: nowrap;
+  font-size:14px;
+  line-height:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  padding:8px 20px;
+}
 
+.btn-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.btn-outlined.btn-black {
+  background: none;
+  color: #000000;
+  border-color: #000000;
+}
+
+.btn-outlined.btn-black:hover,
+.btn-outlined.btn-black:active {
+  color: #FFF;
+  background: #000000;
+  border-color: #000000;
 }
 
 
-.list span:nth-child(2) {
-
-
-}
-/*dasdasdas*/

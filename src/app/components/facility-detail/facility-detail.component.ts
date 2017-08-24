@@ -15,6 +15,8 @@ export class FacilityDetailComponent implements OnInit {
   private facility:Facility = new Facility();
   private sections:Section[]=[];
 
+  private closeDetailsBool:boolean = true;
+
   constructor(private fsmService:FSMService,private router:Router,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit() {
@@ -37,6 +39,13 @@ export class FacilityDetailComponent implements OnInit {
         this.router.navigateByUrl('/home/facilities');
       }
     );
+  }
+
+
+  closeDetails(){
+    this.closeDetailsBool = false;
+    document.getElementById("sectionDiv").classList.remove("col-lg-8");
+    document.getElementById("sectionDiv").classList.add("col-lg-12");
   }
 
 }

@@ -1,4 +1,19 @@
 .jumbotron {
-  background-image: url("../../../images/error.jpg");
+  background-image: url("../../../images/failure-report.svg");
   background-size: cover;
+}
+
+.facility-title{
+  font-family: 'Charoal';
+  font-size: 85px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 120px;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+
+.rows:hover{
+  background-color: tomato;
 }
