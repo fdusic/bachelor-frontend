@@ -1,23 +1,18 @@
 .facility-title{
-  font-family: 'Brush Script MT', cursive;
+  font-family: 'Charoal';
   font-size: 85px;
   font-style: normal;
   font-variant: normal;
   font-weight: 500;
   line-height: 120px;
-  color: #7ac3fe;
+  color: white;
+  text-shadow: 2px 2px black;
 }
 
 .jumbotron {
-  background-image: url("../../../images/top.jpg");
+  background-image: url("../../../images/topology.svg");
   background-size: cover;}
 
-.thumbnail:hover{
-  opacity:1.00;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  transition: box-shadow 0.5s;
-
-}
 
 
 /*dadadas*/
@@ -35,12 +30,12 @@
   margin-bottom: 0;
   vertical-align: middle;
   white-space: nowrap;
-  font-size:14px;
-  line-height:20px;
+  font-size:10px;
+  line-height:15px;
   font-weight:700;
   text-transform:uppercase;
   border: 3px solid;
-  padding:8px 20px;
+  padding:4px 10px;
 }
 
 .btn-outlined {
@@ -63,3 +58,136 @@
 }
 
 /*dadasdas*/
+
+.next_btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+  -moz-user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size:14px;
+  line-height:20px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  padding:8px 20px;
+}
+
+/*dasdasdas*/
+
+
+.cr_btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+  -moz-user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size:10px;
+  line-height:15px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  padding:4px 10px;
+}
+
+.cr-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.cr-outlined.cr-black {
+  background: none;
+  color: red;
+  border-color: black;
+}
+
+.cr-outlined.cr-black:hover,
+.cr-outlined.cr-black:active {
+  color: #FFF;
+  background: red;
+  border-color: black;
+}
+
+/*dasdasdas*/
+
+.cg_btn {
+  letter-spacing: 1px;
+  text-decoration: none;
+  background: none;
+  -moz-user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-size:10px;
+  line-height:15px;
+  font-weight:700;
+  text-transform:uppercase;
+  border: 3px solid;
+  padding:4px 10px;
+}
+
+.cg-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.cg-outlined.cg-black {
+  background: none;
+  color: green;
+  border-color: black;
+}
+
+.cg-outlined.cg-black:hover,
+.cg-outlined.cg-black:active {
+  color: #FFF;
+  background: green;
+  border-color: black;
+}
+
+
+/*dasdadasd*/
+.modal .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+.modal .modal-header .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.modal .modal-footer {
+  border-top: none;
+  padding: 0;
+}
+.modal .modal-footer .btn-group > .btn:first-child {
+  border-bottom-left-radius: 0;
+}
+.modal .modal-footer .btn-group > .btn:last-child {
+  border-top-right-radius: 0;
+}
+
+

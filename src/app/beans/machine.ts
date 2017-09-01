@@ -11,6 +11,5 @@ export class Machine{
   public supportsInterface:Interface[]=[];
   public supportsProtocol: ConnectionType[] = [];
 
-
   constructor(){}
 }

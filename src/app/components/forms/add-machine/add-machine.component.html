@@ -55,6 +55,28 @@
     </div>
 
 
+    <div class="form-group">
+      <div class="container" style="width: 100%">
+        <div class="row">
+
+          <div class="panel panel-default">
+            <div class="panel-heading"><b>Protocols</b> <a data-toggle="modal" data-target="#connectionTypeModal" class="btn btn-success pull-right" style="margin-top: -7px"><span class="glyphicon glyphicon-plus"></span></a></div>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let ct of connectionTypes">
+                <b>Name: </b>{{ct.name}}
+                <b>Description: </b>{{ct.description}}
+                <div class="material-switch pull-right">
+                  <input id="{{'switchct'+ct.idCT}}" name="{{'switchct'+ct.idCT}}" ngModel type="checkbox"/>
+                  <label for="{{'switchct'+ct.idCT}}" class="label-success"></label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
 
     <button type="submit" class="btn btn-primary">Save</button>
@@ -98,6 +120,43 @@
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="connectionTypeModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" id="closeConnectionTypeButton" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+          <h3 class="modal-title" id="lineModalLabel1">Protocol form</h3>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmitConnectionType(fff.value,fff)" ngNativeValidate #fff="ngForm">
+            <div class="form-group">
+              <label for="ctname">Name</label>
+              <input type="text" class="form-control" required ngModel name="name" id="ctname" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="ctdescription">Description</label>
+              <textarea class="form-control" id="ctdescription" name="description" required ngModel placeholder="Description"></textarea>
+            </div>
+
+            <div class="modal-footer">
+              <div class="btn-group btn-group-justified" role="group" aria-label="group button">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"  role="button">Close</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="submit" class="btn btn-primary btn-hover-green" data-action="save" role="button">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </div>
 

@@ -1,28 +1,43 @@
-<div class="container" style="margin-top: 100px">
-  <h1 align="center">Login</h1>
-  <hr>
+<div class="jumbotron" style="border-bottom: 1px solid black">
+  <div class="container text-center">
+    <h1 class="facility-title">Login</h1>
+    <p style="color: white">Take a look at our web site...</p>
+  </div>
+</div>
+
+
+<div class="container" style="margin-top: 85px; width: 500px">
   <form (ngSubmit)="onSubmit(f.value)" #f="ngForm">
     <div class="form-group">
       <label for="username">Username</label>
-      <input type="text"
-             class="form-control"
-             id="username"
-             name="username"
-             ngModel
-             required>
+      <div class="input-group">
+        <span class="input-group-addon ms"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+        <input type="text"
+               class="form-control mi"
+               id="username"
+               name="username"
+               ngModel
+               required
+               placeholder="Username">
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password"
-             class="form-control"
-             id="password"
-             name="password"
-             ngModel
-             required>
+      <div class="input-group">
+        <span class="input-group-addon ms"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+        <input type="password"
+               class="form-control mi"
+               id="password"
+               name="password"
+               ngModel
+               required
+               placeholder="Password">
+      </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+    <button type="submit" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Sign in</button>
   </form>
 
 </div>

@@ -8,7 +8,7 @@ export class Topology{
   public version:number;
   public author:User;
   public section:Section;
-  public machines: Machine[] = [];
+  public machines:Machine[]=[];
 
   constructor(){}
 }
