@@ -1,5 +1,6 @@
 import {Section} from "./section";
 import {Interface} from "./interface";
+import {ConnectionType} from "./connection-type";
 export class Machine{
 
   public idM:number;
@@ -8,6 +9,7 @@ export class Machine{
   public description:string;
   public image:string;
   public supportsInterface:Interface[]=[];
+  public supportsProtocol: ConnectionType[] = [];
 
 
   constructor(){}

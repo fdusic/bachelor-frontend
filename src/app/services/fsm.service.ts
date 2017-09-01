@@ -7,7 +7,6 @@ import {Machine} from "../beans/machine";
 import {FailureReport} from "../beans/failureReport";
 import {ConnectionType} from "../beans/connection-type";
 import {Topology} from "../beans/topology";
-import {MachineInTopology} from "../beans/machine-in-topology";
 
 @Injectable()
 export class FSMService {
@@ -210,14 +209,4 @@ export class FSMService {
       headers: headers, withCredentials : true
     });
   }
-
-  createMachinesInTopology(mts: MachineInTopology[]) {
-    const body = JSON.stringify(mts);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:8080/fsm/createMachinesInTopology', body, {
-      headers: headers, withCredentials : true
-    });
-  }
-
 }

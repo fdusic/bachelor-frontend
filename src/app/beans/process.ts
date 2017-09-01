@@ -1,5 +1,6 @@
 import {Topology} from "./topology";
 import {User} from "./user";
+import {Step} from "./step";
 export class Process{
 
   public idP : number;
@@ -8,5 +9,6 @@ export class Process{
   public version : number;
   public topology : Topology;
   public author : User;
+  public steps : Step[] = [];
 
 }

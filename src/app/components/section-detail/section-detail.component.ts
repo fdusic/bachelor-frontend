@@ -12,6 +12,11 @@ import {Process} from "../../beans/process";
 import {ProcessService} from "../../services/process.service";
 import {Topology} from "../../beans/topology";
 import {TopologyService} from "../../services/topology.service";
+import swal from 'sweetalert2';
+import * as go from "gojs";
+import {GojsBean} from "../../beans/gojsBean";
+import {GojsLink} from "../../beans/gojsLink";
+import {Link} from "../../beans/link";
 
 @Component({
   selector: 'app-section-detail',
@@ -33,6 +38,14 @@ export class SectionDetailComponent implements OnInit {
 
   /* PROCESS VARIABLES */
   private processes : Process[] = [];
+  private chosenTopology : Topology = null;
+  private activeProcess : Process = new Process();
+  @ViewChild('chooseTopologyForProcessClose') chooseTopologyForProcessClose : any;
+
+  private $ : any = null;
+  private diagram : any = null;
+  private selectedProcess : Process = new Process();
+  private selectedProcessLinks : Link[] = [];
   /* PROCESS VARIABLES END! */
 
   /* TOPOLOGY VARIABLES */
@@ -70,6 +83,16 @@ export class SectionDetailComponent implements OnInit {
     this.processService.getProcessesForSection(this.activatedRoute.snapshot.params['idS']).subscribe(
       (data) => {
         this.processes = JSON.parse(data['_body']);
+        this.selectedProcess = this.processes[0];
+        this.processService.getLinksForProcess(this.selectedProcess).subscribe(
+          data => {
+            console.log(data['_body']);
+            console.log('aaaa');
+            if(data['_body'] != '')
+              this.selectedProcessLinks = JSON.parse(data['_body']);
+            this.showProcessDiagram();
+          }
+        );
       }
     );
 
@@ -82,6 +105,90 @@ export class SectionDetailComponent implements OnInit {
   }
 
   /* PROCESS METHODS */
+
+  chooseTopology(t : Topology){
+    if(this.chosenTopology != null)
+      document.getElementById('tr' + this.chosenTopology.idT).classList.remove('selectedRow');
+    this.chosenTopology = t;
+    document.getElementById('tr' + t.idT).classList.add('selectedRow');
+  }
+
+  goToNewProcessPage() {
+    if(this.chosenTopology == null){
+      swal(
+        'Error',
+        'You must select a topology!',
+        'error'
+      );
+    } else{
+      this.chooseTopologyForProcessClose.nativeElement.click();
+      this.router.navigateByUrl('/home/createProcess/' + this.chosenTopology.idT);
+    }
+  }
+
+  setActiveProcess(p : Process) {
+    this.activeProcess = p;
+
+  }
+
+  showProcessDiagram() {
+    let nodeDataArray : GojsBean[] = [];
+    for(let i = 0; i < this.selectedProcess.steps.length; i++) {
+      let bean = new GojsBean();
+      bean.key = this.selectedProcess.steps[i].machine.idM.toString();
+      bean.text = this.selectedProcess.steps[i].name;
+      bean.color = this.selectedProcess.steps[i].color;
+      nodeDataArray.push(bean);
+    }
+
+    let linkDataArray : GojsLink[] = [];
+    for(let i = 0; i < this.selectedProcessLinks.length; i++) {
+      let link = new GojsLink();
+      link.from = this.selectedProcessLinks[i].from.machine.idM.toString();
+      link.to = this.selectedProcessLinks[i].to.machine.idM.toString();
+      linkDataArray.push(link);
+    }
+
+    if(this.$ != null) {
+      this.diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+      this.diagram.rebuildParts();
+      return;
+    }
+
+    this.$ = go.GraphObject.make;
+
+    this.diagram = this.$(go.Diagram, "processDiagramDiv",  // create a this.diagram for the DIV HTML element
+      {
+        initialContentAlignment: go.Spot.Center,  // center the content
+        "undoManager.isEnabled": true  // enable undo & redo
+      });
+
+    this.diagram.layout =
+      this.$(go.LayeredDigraphLayout,  // this will be discussed in a later section
+        { columnSpacing: 5,
+          setsPortSpots: false });
+
+
+
+    this.diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
+    this.diagram.nodeTemplate =
+      this.$(go.Node, "Auto",
+        { fromSpot: go.Spot.Right,  // coming out from middle-right
+          toSpot: go.Spot.Left },   // going into at middle-left
+        this.$(go.Shape, { width : 90, height : 70 },  "RoundedRectangle", new go.Binding("fill", "color")),
+        this.$(go.TextBlock,
+          { margin: 5},
+          new go.Binding("text", "text"))
+      );
+
+    this.diagram.linkTemplate =
+      this.$(go.Link,
+        this.$(go.Shape),
+        this.$(go.Shape, { toArrow: "Triangle"})
+      );
+  }
+
   /* PROCESS METHODS END! */
 
   /* TOPOLOGY METHODS */

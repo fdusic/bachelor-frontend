@@ -17,7 +17,7 @@
     <li><a data-toggle="modal" data-target="#connectionTypeModal">New Protocol</a></li>
     <li class="divider"></li>
     <li><a href="#">New Topology</a></li>
-    <li><a href="#">New Process</a></li>
+    <li><a data-toggle="modal" data-target="#chooseTopologyForProcess">New Process</a></li>
   </ul>
   </div>
 
@@ -144,39 +144,38 @@
           <div class="tab-pane active fade in" id="tab_default_4">
             <div class="container">
               <div class="row">
-                <div align="center">
-                  <div style="border: 1px solid red; width: 1100px; height: 400px; margin-bottom: 10px;"></div>
+                <div class="col-md-6">
+                  <table class="table table-bordered" id="processesTable">
+                    <caption style="background-color: #84a3c0;">
+                      <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">
+                        Processes</h3>
+                    </caption>
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th colspan="3">Description</th>
+                      <th>Topology</th>
+                      <th>Author</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="rows" *ngFor="let p of processes; let i = index" id="trp{{p.idP}}" (click)="setActiveProcess(p)">
+                      <td>{{i + 1}}.</td>
+                      <td>{{p.idP}}</td>
+                      <td>{{p.name}}</td>
+                      <td colspan="3">{{p.description}}</td>
+                      <td>{{p.topology.name}}</td>
+                      <td>{{p.author.username}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6" align="center">
+                  <div id="processDiagramDiv" style="border: 1px solid black; width: 600px; height: 400px; margin-bottom: 10px;"></div>
                 </div>
               </div>
-            </div>
-            <div class="container">
-              <table class="table table-bordered" id="processesTable">
-                <caption style="background-color: #84a3c0; border: 1px solid black">
-                  <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Processes</h3>
-                </caption>
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th colspan="3">Description</th>
-                  <th>Version</th>
-                  <th>Topology</th>
-                  <th>Author</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <tr class="rows" *ngFor="let p of processes; let i = index">
-                    <td>{{i + 1}}.</td>
-                    <td>{{p.idP}}</td>
-                    <td>{{p.name}}</td>
-                    <td colspan="3">{{p.description}}</td>
-                    <td>{{p.version}}</td>
-                    <td>{{p.topology.name}}</td>
-                    <td>{{p.author.username}}</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
 
@@ -435,6 +434,51 @@
           </div>
         </form>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="chooseTopologyForProcess" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="chooseTopologyForProcessClose" #chooseTopologyForProcessClose data-dismiss="modal"><span
+          aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <div align="center"><h3 class="modal-title" id="lineModalLabel11">Choose a topology for new process</h3></div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <table class="table table-bordered" id="topologyTablee">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th colspan="3">Description</th>
+              <th>Version</th>
+              <th>Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="rowPointer" *ngFor="let t of topologies; let i = index" (click)="chooseTopology(t)"
+                id="tr{{t.idT}}">
+              <td>{{i + 1}}.</td>
+              <td>{{t.idT}}</td>
+              <td>{{t.name}}</td>
+              <td colspan="3">{{t.description}}</td>
+              <td>{{t.version}}</td>
+              <td>{{t.author.username}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div align="center" style="margin-bottom: 20px;">
+          <button type="button" class="btn btn-primary" role="button" (click)="goToNewProcessPage()">Choose</button>
+        </div>
       </div>
     </div>
   </div>

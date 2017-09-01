@@ -29,6 +29,7 @@ import {RoleService} from "./services/role.service";
 import { TopologyComponent } from './components/topology/topology.component';
 import {ProcessService} from "./services/process.service";
 import {TopologyService} from "./services/topology.service";
+import { CreateProcessComponent } from './components/create-process/create-process.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {TopologyService} from "./services/topology.service";
     AddMachineComponent,
     UpdateMachineComponent,
     FailureReportsComponent,
-    TopologyComponent
+    TopologyComponent,
+    CreateProcessComponent
   ],
   imports: [
     BrowserModule,

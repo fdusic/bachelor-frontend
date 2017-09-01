@@ -1,14 +1,9 @@
-import {Machine} from "./machine";
 import {Topology} from "./topology";
+import {Machine} from "./machine";
+export class MachineInTopology {
 
-export class MachineInTopology{
-  public idMT:number;
-  public description:string;
-  public x:number;
-  public y:number;
-  public machine:Machine;
-  public topology:Topology
+  public idMT : number;
+  public topology : Topology;
+  public machine : Machine;
 
-
-  constructor(){}
 }

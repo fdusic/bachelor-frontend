@@ -17,6 +17,7 @@ import {AddMachineComponent} from "./components/forms/add-machine/add-machine.co
 import {UpdateMachineComponent} from "./components/forms/update-machine/update-machine.component";
 import {FailureReportsComponent} from "./components/failure-reports/failure-reports.component";
 import {TopologyComponent} from "./components/topology/topology.component";
+import {CreateProcessComponent} from "./components/create-process/create-process.component";
 
 const APP_ROUTES: Routes = [
   {path:'home',component:HomeComponent, children:[
@@ -33,6 +34,7 @@ const APP_ROUTES: Routes = [
     {path:'registrationreport',component:RegistrationReportComponent},
     {path:'registrationReports', component: RegistrationReportsComponent},
     {path:'failureReports', component:FailureReportsComponent},
+    {path:'createProcess/:idT', component:CreateProcessComponent},
     {path:'',component:WelcomeComponent}
   ]},
   {path:'',component:LoginComponent}

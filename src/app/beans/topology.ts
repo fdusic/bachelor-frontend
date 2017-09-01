@@ -1,5 +1,6 @@
 import {User} from "./user";
 import {Section} from "./section";
+import {Machine} from "./machine";
 export class Topology{
   public idT:number;
   public description:string;
@@ -7,6 +8,7 @@ export class Topology{
   public version:number;
   public author:User;
   public section:Section;
+  public machines: Machine[] = [];
 
   constructor(){}
 }
