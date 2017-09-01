@@ -35,16 +35,16 @@
     <div class="tabbable-panel margin-tops4 ">
       <div class="tabbable-line">
         <ul class="nav nav-tabs tabtop  tabsetting">
-          <li class="active"> <a href="#tab_default_1" data-toggle="tab"> Details </a> </li>
+          <li> <a href="#tab_default_1" data-toggle="tab"> Details </a> </li>
           <li> <a href="#tab_default_2" data-toggle="tab"> Machines </a> </li>
           <li> <a href="#tab_default_3" data-toggle="tab"> Topology </a> </li>
-          <li> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
+          <li class="active"> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
           <li> <a href="#tab_default_6" data-toggle="tab"> Interfaces </a> </li>
           <li> <a href="#tab_default_5" data-toggle="tab"> Protocols </a> </li>
         </ul>
         <div class="tab-content margin-tops">
 
-          <div class="tab-pane active fade in" id="tab_default_1">
+          <div class="tab-pane fade" id="tab_default_1">
               <div class="container">
                 <table class="table table-bordered">
                   <caption style="background-color: #84a3c0; border: 1px solid black">
@@ -105,25 +105,79 @@
           </div>
 
           <div class="tab-pane fade" id="tab_default_3">
-              <a [routerLink]="['/home/addtopology',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">New Topology <span class="glyphicon glyphicon-plus"></span></a>
-              <hr>
-              <h4 class="heading4">Shopify Product Upload </h4>
-              <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
-              <h4 class="heading4">Shopify Product Upload </h4>
-              <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
-              <a href="#">
-                <div class="btns">View More <i class="fa fa-angle-right"></i></div>
-              </a>
+            <div class="container">
+              <div class="row">
+                <div align="center">
+                  <div style="border: 1px solid red; width: 1100px; height: 400px; margin-bottom: 10px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <table class="table table-bordered" id="topologyTable">
+                <caption style="background-color: #84a3c0; border: 1px solid black">
+                  <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Topologies</h3>
+                </caption>
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th colspan="3">Description</th>
+                  <th>Version</th>
+                  <th>Author</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="rows" *ngFor="let t of topologies; let i = index">
+                  <td>{{i + 1}}.</td>
+                  <td>{{t.idT}}</td>
+                  <td>{{t.name}}</td>
+                  <td colspan="3">{{t.description}}</td>
+                  <td>{{t.version}}</td>
+                  <td>{{t.author.username}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div class="tab-pane fade" id="tab_default_4">
-              <h4 class="heading4">OpenCart Product Upload</h4>
-              <p>Are you looking for someone who could upload products on your Magento based website? At webenlance India, we can effectively help you with our top quality Magento product upload services. With the pool of well experienced and talented experts, we ensure that your customers have an enriching experience every time they visit your website. Our comprehensive range of services is available all over the globe at extremely low cost. </p>
-              <h4 class="heading4">OpenCart Product Upload</h4>
-              <p>Also a data entry company from India, we provide time-bound and high-quality data entry services and encourage our clients to outsource end-to-end data entry projects to us. </p>
-              <a href="#">
-                <div class="btns">View More <i class="fa fa-angle-right"></i></div>
-              </a>
+          <div class="tab-pane active fade in" id="tab_default_4">
+            <div class="container">
+              <div class="row">
+                <div align="center">
+                  <div style="border: 1px solid red; width: 1100px; height: 400px; margin-bottom: 10px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <table class="table table-bordered" id="processesTable">
+                <caption style="background-color: #84a3c0; border: 1px solid black">
+                  <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Processes</h3>
+                </caption>
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th colspan="3">Description</th>
+                  <th>Version</th>
+                  <th>Topology</th>
+                  <th>Author</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr class="rows" *ngFor="let p of processes; let i = index">
+                    <td>{{i + 1}}.</td>
+                    <td>{{p.idP}}</td>
+                    <td>{{p.name}}</td>
+                    <td colspan="3">{{p.description}}</td>
+                    <td>{{p.version}}</td>
+                    <td>{{p.topology.name}}</td>
+                    <td>{{p.author.username}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div class="tab-pane fade" id="tab_default_5">
