@@ -1,94 +1,329 @@
-<div class="jumbotron">
+<div class="jumbotron" style="border-bottom: 1px solid black">
   <div class="container text-center">
-    <h1 class="facility-title">New topology</h1>
-    <p style="color: #7ac3fe">Place machines as you wish...</p>
+    <h1 class="facility-title">Topology</h1>
+    <p style="color: white">Make your own topology...</p>
   </div>
 </div>
-<hr>
-
-<div class="container" id="machinesContainer">
-  <h3>Select machines for topology:</h3>
-  <div class="row">
-    <!-- BEGIN MACHINES -->
-    <div style="height: 300px" class="col-md-3 col-sm-6" *ngFor="let machine of machines">
-    		<span id="{{'span'+machine.idM}}" class="thumbnail text-center">
-      			<img style="width: 140px;height: 110px" src="{{'./images/' + machine.idM + machine.image}}" alt="...">
-      			<h4 class="text-danger">Machine details:</h4>
-      			<p>idM: {{machine.idM}}</p>
-      			<p>Name: {{machine.name}}</p>
-      			<p>Description: {{machine.description}}</p>
-      			<hr class="line">
-      			<div class="row">
-      					<a id="{{'as'+machine.idM}}" (click)="selectMachine(machine)" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Select <span class="glyphicon glyphicon-ok"></span></a>
-                <a id="{{'au'+machine.idM}}" (click)="unselectMachine(machine)" style="display: none" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Unselect <span class="glyphicon glyphicon-remove"></span></a>
-      			</div>
-    		</span>
-    </div>
-    <!-- END MACHINES -->
-  </div>
-
-  <br>
-  <br>
 
 
-  <div class="row" align="center">
-    <a (click)="onNext()" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Next <span class="glyphicon glyphicon-play"></span></a>
-  </div>
-  <hr>
-</div>
-
-
-<div class="container-fluid" id="topologyDiv" style="display: none">
-  <label align="left">Topology:</label>
-  <table class="table table-hover table-inverse" id="topologyTable">
+<div class="container" *ngIf="step1">
+  <table class="table table-bordered">
+    <caption style="background-color: #543025; border: 1px solid black">
+      <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Choose machines that will participate in the topology</h3>
+    </caption>
     <thead>
     <tr>
-      <th>idI</th>
+      <th>idM</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Version</th>
-      <th>Author</th>
-      <th>Section</th>
+      <th>Image</th>
+      <th>Interfaces & Protocols</th>
+      <th>Choose</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>{{topology.idT}}</td>
-      <td>{{topology.name}}</td>
-      <td>{{topology.description}}</td>
-      <td>{{topology.version}}</td>
-      <td>{{topology.author.username}}</td>
-      <td>{{topology.section.name}}</td>
-    </tr>
-    </tbody>
-  </table>
-
-  <hr>
-
-  <label align="left">Machines in topology:</label>
-  <table class="table table-hover table-inverse" id="mitTable">
-    <thead>
-    <tr *ngFor="let mit of machinesInTopology">
-      <th>idMT</th>
-      <th>Description</th>
-      <th>X</th>
-      <th>Y</th>
-      <th>Machine</th>
-      <th>Topology</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>{{mit.idMT}}</td>
-      <td>{{mit.description}}</td>
-      <td>{{mit.X}}</td>
-      <td>{{mit.Y}}</td>
-      <td>{{mit.machine.name}}</td>
-      <td>{{mit.topology.idT}}</td>
+    <tr class="rows" *ngFor="let m of machines" id="{{'tr'+m.idM}}">
+      <th scope="row">{{m.idM}}</th>
+      <td>{{m.name}}</td>
+      <td>{{m.description}}</td>
+      <td><img title="{{m.image}}" class="media-object" src="{{'./images/' + m.idM + m.image}}" style="width: 50px; height: 30px"></td>
+      <td><a (click)="assignMasineForView(m)" style="cursor: pointer" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s"> View <span class="glyphicon glyphicon-zoom-in"></span></a></td>
+      <td><a (click)="machineClick(m)" style="cursor: pointer" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Click </a></td>
     </tr>
     </tbody>
   </table>
 </div>
+
+<hr *ngIf="step1">
+
+<div class="row" *ngIf="step1">
+  <div class="container">
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <caption style="background-color: #fdfff8; border: 1px solid black">
+          <h3 style="color: black;text-shadow: 1px 1px black; font-family: Beirut" align="center">Supported interfaces by : idM: {{viewMachine.idM + ' Name: '+viewMachine.name}} </h3>
+        </caption>
+        <thead>
+        <tr>
+          <th>idI</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iface of viewMachine.supportsInterface">
+          <th scope="row">{{iface.idI}}</th>
+          <td>{{iface.name}}</td>
+          <td>{{iface.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <caption style="background-color: #fdfff8; border: 1px solid black">
+          <h3 style="color: black;text-shadow: 1px 1px black; font-family: Beirut" align="center">Supported protocols by : idM: {{viewMachine.idM + ' Name: '+viewMachine.name}} </h3>
+        </caption>
+        <thead>
+        <tr>
+          <th>idP</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="rows" *ngFor="let ct of viewMachine.supportsProtocol">
+          <th scope="row">{{ct.idCT}}</th>
+          <td>{{ct.name}}</td>
+          <td>{{ct.description}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!--step2-->
+<div class="container" *ngIf="step2">
+  <table class="table table-bordered">
+    <caption style="background-color: #543025; border: 1px solid black">
+      <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Select the machine to connect</h3>
+    </caption>
+    <thead>
+    <tr>
+      <th>idM</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Choose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="rows" *ngFor="let m of selectedMachines" id="{{'trsm'+m.idM}}">
+      <th scope="row">{{m.idM}}</th>
+      <td>{{m.name}}</td>
+      <td>{{m.description}}</td>
+      <td><img title="{{m.image}}" class="media-object" src="{{'./images/' + m.idM + m.image}}" style="width: 50px; height: 30px"></td>
+      <td><a (click)="selectedMachineClick(m)" style="cursor: pointer" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Click </a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<hr *ngIf="step2_2">
+
+<div class="container" *ngIf="step2_2">
+  <table class="table table-bordered">
+    <caption style="background-color: #fdfff8; border: 1px solid black">
+      <h3 style="color: black;text-shadow: 1px 1px black; font-family: Beirut" align="center">Machines for connecting with : idM: {{machineToConnect.idM + ' Name: '+machineToConnect.name}} </h3>
+    </caption>
+    <thead>
+    <tr>
+      <th>idM</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Connect</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="rows" *ngFor="let m of machinesToConnect" id="{{'trmc'+m.idM}}">
+      <th scope="row">{{m.idM}}</th>
+      <td>{{m.name}}</td>
+      <td>{{m.description}}</td>
+      <td><img title="{{m.image}}" class="media-object" src="{{'./images/' + m.idM + m.image}}" style="width: 50px; height: 30px"></td>
+      <td>
+        <a *ngIf="!areConnected(m)" (click)="connectMachines(m)" id="{{'a_cm'+m.idM}}" style="cursor: pointer" [ngClass]="{ 'cr_btn cr-outlined cr-black btn-lg': !canConnect(m), 'cg_btn cg-outlined cg-black btn-lg': canConnect(m)}" data-wow-delay="0.7s">Connect </a>
+        <a *ngIf="areConnected(m)" (click)="disconnectMachines(m)" style="cursor: pointer" class="cr_btn cr-outlined cr-black btn-lg" data-wow-delay="0.7s">Cut off &nbsp; </a>
+      </td>
+      <td>
+        <div class="progress" *ngIf="!areConnected(m)">
+          <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="width: 0%">
+            None     &nbsp;
+          </div>
+        </div>
+        <div class="progress" *ngIf="areConnected(m)">
+          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width: 100%">
+            Connected
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="container" *ngIf="step3">
+  <table class="table table-bordered">
+    <caption style="background-color: #543025; border: 1px solid black">
+      <h3 style="color: white;text-shadow: 1px 1px black; font-family: Beirut" align="center">Look at the connections you've created</h3>
+    </caption>
+    <thead>
+    <tr>
+      <th>Machine</th>
+      <th>Machine</th>
+      <th>Interface</th>
+      <th>Protocol</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cm of connectedMachines">
+      <td>
+        <div class="row">
+          <div class="col-sm-4">
+            <img title="{{cm.machine1.image}}" class="media-object" src="{{'./images/' + cm.machine1.idM + cm.machine1.image}}" style="width: 50px; height: 30px">
+          </div>
+          <div class="col-sm-8">
+            <ul>
+              <li><b style="font-family: 'Beirut'">idM : </b>{{cm.machine1.idM}}</li>
+              <li><b style="font-family: 'Beirut'">NAME : </b>{{cm.machine1.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="row">
+          <div class="col-sm-4">
+            <img title="{{cm.machine2.image}}" class="media-object" src="{{'./images/' + cm.machine2.idM + cm.machine2.image}}" style="width: 50px; height: 30px">
+          </div>
+          <div class="col-sm-8">
+            <ul>
+              <li><b style="font-family: 'Beirut'">idM : </b>{{cm.machine2.idM}}</li>
+              <li><b style="font-family: 'Beirut'">NAME : </b>{{cm.machine2.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </td>
+      <td>
+        <ul>
+          <li><b style="font-family: 'Beirut'">idI : </b>{{cm.iface.idI}}</li>
+          <li><b style="font-family: 'Beirut'">NAME : </b>{{cm.iface.name}}</li>
+          <li><b style="font-family: 'Beirut'">DESCRIPTION : </b>{{cm.iface.description}}</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li><b style="font-family: 'Beirut'">idP : </b>{{cm.connectionType.idCT}}</li>
+          <li><b style="font-family: 'Beirut'">NAME : </b>{{cm.connectionType.name}}</li>
+          <li><b style="font-family: 'Beirut'">DESCRIPTION : </b>{{cm.connectionType.description}}</li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div id="myDiagramDiv" style="border: solid 1px black; margin: 10px; height: 700px; display: none"></div>
+
+
+
+<hr>
+
+<div class="container" align="center">
+  <a (click)="onNext()" style="cursor: pointer" class="next_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">NEXT <span class="glyphicon glyphicon-forward"></span> </a>
+</div>
+
+<button style="display: none" id="buttonIPModal" data-toggle="modal" data-target="#IPModal"></button>
+
+
+<div class="modal fade" id="IPModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="closeIPModal" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      </div>
+      <div class="modal-body">
+
+        <table class="table table-bordered">
+          <caption style="background-color: #82b082; border: 1px solid black">
+            <h3 style="color: black;text-shadow: 1px 1px black; font-family: Beirut" align="center">Select the connection interface </h3>
+          </caption>
+          <thead>
+          <tr>
+            <th>idI</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Choose</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let iface of commonInterfaces" id="{{'trcis'+iface.idI}}">
+            <th scope="row">{{iface.idI}}</th>
+            <td>{{iface.name}}</td>
+            <td>{{iface.description}}</td>
+            <td><a (click)="commonInterfacesClick(iface)" style="cursor: pointer" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Click </a></td>
+          </tr>
+          </tbody>
+        </table>
+
+
+        <table class="table table-bordered">
+          <caption style="background-color: #82b082; border: 1px solid black">
+            <h3 style="color: black;text-shadow: 1px 1px black; font-family: Beirut" align="center">Select the connection protocol </h3>
+          </caption>
+          <thead>
+          <tr>
+            <th>idP</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Choose</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ct of commonProtocols" id="{{'trcps'+ct.idCT}}">
+            <th scope="row">{{ct.idCT}}</th>
+            <td>{{ct.name}}</td>
+            <td>{{ct.description}}</td>
+            <td><a (click)="commonProtocolClick(ct)" style="cursor: pointer" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Click </a></td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="modal-footer" style="text-align: center">
+            <a class="next_btn cg-outlined cg-black btn-lg" (click)="onFinishConnection()" data-wow-delay="0.7s">Connect</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button style="display: none" id="buttonTModal" data-target="#topologyModal" data-toggle="modal"></button>
+
+
+<div class="modal fade" id="topologyModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="closeTopologyModal" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" style="font-family: Beirut" align="center" id="lineModalLabel102">TOPOLOGY DETAILS</h3>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitTopology(tff.value)" ngNativeValidate #tff="ngForm">
+          <div class="form-group">
+            <label for="tname">Name</label>
+            <input type="text" class="form-control" required ngModel name="name" id="tname" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="tdescription">Description</label>
+            <textarea class="form-control" id="tdescription" name="description" required ngModel placeholder="Description"></textarea>
+          </div>
+
+          <div class="modal-footer" style="text-align: center">
+            <button class="next_btn btn-outlined btn-black btn-lg" type="submit" data-wow-delay="0.7s">Save <span class="glyphicon glyphicon-save"></span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 

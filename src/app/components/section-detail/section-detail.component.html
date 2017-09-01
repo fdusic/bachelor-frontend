@@ -16,7 +16,7 @@
     <li><a data-toggle="modal" data-target="#interfaceModal">New Interface</a></li>
     <li><a data-toggle="modal" data-target="#connectionTypeModal">New Protocol</a></li>
     <li class="divider"></li>
-    <li><a href="#">New Topology</a></li>
+    <li><a [routerLink]="['/home/addtopology',section.idS]">New Topology</a></li>
     <li><a href="#">New Process</a></li>
   </ul>
   </div>
@@ -134,10 +134,9 @@
                   </caption>
                   <thead>
                   <tr>
-                    <th>idCT</th>
+                    <th>idP</th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Interface</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -145,7 +144,6 @@
                     <th scope="row">{{contype.idCT}}</th>
                     <td>{{contype.name}}</td>
                     <td>{{contype.description}}</td>
-                    <td>{{contype.iface.name}}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -254,7 +252,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" id="closeConnectionTypeButton" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-        <h3 class="modal-title" id="lineModalLabel">Connection type form</h3>
+        <h3 class="modal-title" id="lineModalLabel">Protocol form</h3>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSubmitConnectionType(fff)" ngNativeValidate #fff="ngForm">
@@ -265,14 +263,6 @@
           <div class="form-group">
             <label for="ctdescription">Description</label>
             <textarea class="form-control" id="ctdescription" name="description" required ngModel placeholder="Description"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label for="interface">Interface</label>
-            <select ngModel required name="interface" id="interface" class="form-control">
-              <option disabled selected value> -- select interface -- </option>
-              <option *ngFor="let ifaces of interfaces">{{'idI:'+ifaces.idI + ' '+ 'Name:'+ifaces.name}}</option>
-            </select>
           </div>
 
           <div class="modal-footer">

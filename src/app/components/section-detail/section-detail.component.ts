@@ -103,16 +103,6 @@ export class SectionDetailComponent implements OnInit {
       ct.name = form.controls['name'].value;
       ct.description = form.controls['description'].value;
 
-      let temp:string = form.controls['interface'].value;
-      let s1:string = temp.split(' ')[0];
-      let s2:string = s1.split(':')[1];
-
-      for(var i = 0;i < this.interfaces.length; i++){
-        if(parseInt(s2) == this.interfaces[i].idI){
-          ct.iface = this.interfaces[i];
-          break;
-        }
-      }
 
       this.fsmService.createConnectionType(ct).subscribe(
         (data) => {
