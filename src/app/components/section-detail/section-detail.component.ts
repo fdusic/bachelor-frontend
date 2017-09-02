@@ -39,7 +39,6 @@ export class SectionDetailComponent implements OnInit {
   /* PROCESS VARIABLES */
   private processes : Process[] = [];
   private chosenTopology : Topology = null;
-  private activeProcess : Process = new Process();
   @ViewChild('chooseTopologyForProcessClose') chooseTopologyForProcessClose : any;
 
   private $ : any = null;
@@ -86,11 +85,10 @@ export class SectionDetailComponent implements OnInit {
         this.selectedProcess = this.processes[0];
         this.processService.getLinksForProcess(this.selectedProcess).subscribe(
           data => {
-            console.log(data['_body']);
-            console.log('aaaa');
             if(data['_body'] != '')
               this.selectedProcessLinks = JSON.parse(data['_body']);
             this.showProcessDiagram();
+            document.getElementById('trp' + this.selectedProcess.idP).classList.add('selectedRow');
           }
         );
       }
@@ -127,7 +125,21 @@ export class SectionDetailComponent implements OnInit {
   }
 
   setActiveProcess(p : Process) {
-    this.activeProcess = p;
+    if(p.idP == this.selectedProcess.idP)
+      return;
+    document.getElementById('trp' + this.selectedProcess.idP).classList.remove('selectedRow');
+    this.selectedProcess = p;
+    document.getElementById('trp' + this.selectedProcess.idP).classList.add('selectedRow');
+    this.processService.getLinksForProcess(p).subscribe(
+      data => {
+        if(data['_body'] != '') {
+          this.selectedProcessLinks = JSON.parse(data['_body']);
+        } else {
+          this.selectedProcessLinks = [];
+        }
+        this.showProcessDiagram();
+      }
+    );
 
   }
 
@@ -176,7 +188,7 @@ export class SectionDetailComponent implements OnInit {
       this.$(go.Node, "Auto",
         { fromSpot: go.Spot.Right,  // coming out from middle-right
           toSpot: go.Spot.Left },   // going into at middle-left
-        this.$(go.Shape, { width : 90, height : 70 },  "RoundedRectangle", new go.Binding("fill", "color")),
+        this.$(go.Shape,  "RoundedRectangle", new go.Binding("fill", "color")),
         this.$(go.TextBlock,
           { margin: 5},
           new go.Binding("text", "text"))

@@ -12,6 +12,7 @@ import {GojsBean} from "../../beans/gojsBean";
 import {GojsLink} from "../../beans/gojsLink";
 import {Process} from "../../beans/process";
 import {ProcessSaveHelp} from "../../beans/processSaveHelp";
+import {ConnectedMachines} from "../../beans/connected-machines";
 
 @Component({
   selector: 'app-create-process',
@@ -37,6 +38,7 @@ export class CreateProcessComponent implements OnInit {
   @ViewChild('addSuccessorsClose') addSuccessorsClose : any;
 
   private topology : Topology = new Topology();
+  private connectedMachines : ConnectedMachines[] = [];
   private availableMachines : Machine[] = [];
   private steps : Step[] = [];
   private importSteps : Step[] = [];
@@ -57,6 +59,11 @@ export class CreateProcessComponent implements OnInit {
       (data) => {
         this.topology = JSON.parse(data['_body']);
         this.availableMachines = this.topology.machines;
+        this.processService.getMachineConnections(this.topology).subscribe(
+          data => {
+            this.connectedMachines = JSON.parse(data['_body']);
+          }
+        );
       }
     );
   }
@@ -105,7 +112,8 @@ export class CreateProcessComponent implements OnInit {
           break;
         }
       }
-      if(flag) {
+
+      if(flag && this.areConnected(this.selectedStep.machine, this.steps[i].machine)) {
         this.availableSuccessors.push(this.steps[i]);
       }
     }
@@ -122,7 +130,19 @@ export class CreateProcessComponent implements OnInit {
         }
       );
     }
+  }
 
+  areConnected(m1 : Machine, m2 : Machine) {
+    if(m1.idM == m2.idM)
+      return true;
+    for(let i = 0; i < this.connectedMachines.length; i++) {
+      if((this.connectedMachines[i].machine1.idM == m1.idM && this.connectedMachines[i].machine2.idM == m2.idM) ||
+                                            ((this.connectedMachines[i].machine2.idM == m1.idM && this.connectedMachines[i].machine1.idM == m2.idM))) {
+        console.log(m1.idM + ' ' + m2.idM);
+        return true;
+      }
+    }
+    return false;
   }
 
   addSuccessor() {
@@ -365,7 +385,7 @@ export class CreateProcessComponent implements OnInit {
       this.$(go.Node, "Auto",
         { fromSpot: go.Spot.Right,  // coming out from middle-right
           toSpot: go.Spot.Left },   // going into at middle-left
-        this.$(go.Shape, { width : 90, height : 70 },  "RoundedRectangle", new go.Binding("fill", "color")),
+        this.$(go.Shape, "RoundedRectangle", new go.Binding("fill", "color")),
         this.$(go.TextBlock,
           { margin: 5},
           new go.Binding("text", "text"))

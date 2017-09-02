@@ -3,6 +3,7 @@ import {Http, Headers} from "@angular/http";
 import {Machine} from "../beans/machine";
 import {Process} from "../beans/process";
 import {Link} from "../beans/link";
+import {Topology} from "../beans/topology";
 
 @Injectable()
 export class ProcessService {
@@ -41,6 +42,12 @@ export class ProcessService {
     const headers = new Headers();
     headers.append('Content-Type','application/json');
     return this.http.post(this.path + 'getLinksForProcess', JSON.stringify(p), { withCredentials : true, headers : headers });
+  }
+
+  getMachineConnections(t : Topology) {
+    const headers = new Headers();
+    headers.append('Content-Type','application/json');
+    return this.http.get(this.path + 'getMachineConnections/?' + 'topology=' + t.idT, { withCredentials : true, headers : headers });
   }
 
 }

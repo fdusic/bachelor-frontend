@@ -169,16 +169,11 @@ a:hover{
   cursor: pointer;
 }
 
-.rows:hover{
-  background-color: olive;
-}
-
 .selectedRow{
   background: olive;
 }
 
 .rows:hover{
-  background: none;
   cursor: pointer;
 }
 
