@@ -12,11 +12,12 @@ import {Process} from "../../beans/process";
 import {ProcessService} from "../../services/process.service";
 import {Topology} from "../../beans/topology";
 import {TopologyService} from "../../services/topology.service";
-import swal from 'sweetalert2';
 import * as go from "gojs";
 import {GojsBean} from "../../beans/gojsBean";
 import {GojsLink} from "../../beans/gojsLink";
 import {Link} from "../../beans/link";
+
+declare let swal:any;
 
 @Component({
   selector: 'app-section-detail',
@@ -39,7 +40,6 @@ export class SectionDetailComponent implements OnInit{
   /* PROCESS VARIABLES */
   private processes : Process[] = [];
   private chosenTopology : Topology = null;
-  private activeProcess : Process = new Process();
   @ViewChild('chooseTopologyForProcessClose') chooseTopologyForProcessClose : any;
 
   private $ : any = null;
@@ -91,6 +91,7 @@ export class SectionDetailComponent implements OnInit{
             if(data['_body'] != '')
               this.selectedProcessLinks = JSON.parse(data['_body']);
             this.showProcessDiagram();
+            document.getElementById('trp' + this.selectedProcess.idP).classList.add('selectedRow');
           }
         );
       }
@@ -127,7 +128,21 @@ export class SectionDetailComponent implements OnInit{
   }
 
   setActiveProcess(p : Process) {
-    this.activeProcess = p;
+    if(p.idP == this.selectedProcess.idP)
+      return;
+    document.getElementById('trp' + this.selectedProcess.idP).classList.remove('selectedRow');
+    this.selectedProcess = p;
+    document.getElementById('trp' + this.selectedProcess.idP).classList.add('selectedRow');
+    this.processService.getLinksForProcess(p).subscribe(
+      data => {
+        if(data['_body'] != '') {
+          this.selectedProcessLinks = JSON.parse(data['_body']);
+        } else {
+          this.selectedProcessLinks = [];
+        }
+        this.showProcessDiagram();
+      }
+    );
 
   }
 
@@ -176,7 +191,7 @@ export class SectionDetailComponent implements OnInit{
       this.$(go.Node, "Auto",
         { fromSpot: go.Spot.Right,  // coming out from middle-right
           toSpot: go.Spot.Left },   // going into at middle-left
-        this.$(go.Shape, { width : 90, height : 70 },  "RoundedRectangle", new go.Binding("fill", "color")),
+        this.$(go.Shape,  "RoundedRectangle", new go.Binding("fill", "color")),
         this.$(go.TextBlock,
           { margin: 5},
           new go.Binding("text", "text"))
