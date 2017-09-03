@@ -225,8 +225,13 @@
 
 <hr>
 
-<div class="container" align="center">
+<div class="container" align="center" *ngIf="nextBoolean">
   <a (click)="onNext()" style="cursor: pointer" class="next_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">NEXT <span class="glyphicon glyphicon-forward"></span> </a>
+</div>
+
+
+<div class="container" align="center" *ngIf="finishBoolean">
+  <a [routerLink]="['/home/sections',section.idS]" style="cursor: pointer" class="next_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">FINISH <span class="glyphicon glyphicon-share"></span> </a>
 </div>
 
 <button style="display: none" id="buttonIPModal" data-toggle="modal" data-target="#IPModal"></button>

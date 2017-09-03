@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {Section} from "../../beans/section";
 import {FSMService} from "../../services/fsm.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -23,7 +23,7 @@ import {Link} from "../../beans/link";
   templateUrl: './section-detail.component.html',
   styleUrls: ['./section-detail.component.css']
 })
-export class SectionDetailComponent implements OnInit {
+export class SectionDetailComponent implements OnInit{
 
   private section:Section = new Section();
   private machines:Machine[]=[];
@@ -54,6 +54,8 @@ export class SectionDetailComponent implements OnInit {
 
   constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router, private roleService: RoleService,
                     private processService : ProcessService, private topologyService : TopologyService) { }
+
+
 
   ngOnInit() {
 
@@ -86,8 +88,6 @@ export class SectionDetailComponent implements OnInit {
         this.selectedProcess = this.processes[0];
         this.processService.getLinksForProcess(this.selectedProcess).subscribe(
           data => {
-            console.log(data['_body']);
-            console.log('aaaa');
             if(data['_body'] != '')
               this.selectedProcessLinks = JSON.parse(data['_body']);
             this.showProcessDiagram();
@@ -192,6 +192,11 @@ export class SectionDetailComponent implements OnInit {
   /* PROCESS METHODS END! */
 
   /* TOPOLOGY METHODS */
+
+  makeGoTopology(){
+    alert("sdas");
+  }
+
   /* TOPOLOGY METHODS END! */
 
   deleteSection(){

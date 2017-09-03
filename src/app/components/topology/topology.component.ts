@@ -9,6 +9,7 @@ import {ConnectedMachines} from "../../beans/connected-machines";
 import * as go from "gojs";
 import {GoJSBean} from "../../beans/gojs-bean";
 import {Interface} from "../../beans/interface";
+import {TopologyService} from "../../services/topology.service";
 
 declare let swal:any;
 
@@ -35,6 +36,9 @@ export class TopologyComponent implements OnInit {
 
   private step3:boolean = false;
 
+  private nextBoolean:boolean = true;
+  private finishBoolean:boolean = false;
+
 
   //za konekciju
   private machinesToConnect:Machine[]=[];
@@ -54,7 +58,7 @@ export class TopologyComponent implements OnInit {
 
 
 
-  constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router) { }
+  constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router,private topologyService:TopologyService) { }
 
   ngOnInit() {
 
@@ -362,8 +366,26 @@ export class TopologyComponent implements OnInit {
 
     topology.machines = this.selectedMachines;
     topology.section = this.section;
+    topology.active = false;
 
     //SERVIS -- Metoda za dodavanje topologije
+    this.topologyService.saveTopology(topology).subscribe(
+      (data) => {
+        topology = JSON.parse(data['_body']);
+
+        for(var i = 0; i < this.connectedMachines.length; i++){
+          this.connectedMachines[i].topology = topology;
+        }
+
+        this.topologyService.saveConnectedMachines(this.connectedMachines).subscribe(
+          () => {
+
+          }
+        );
+
+      }
+    );
+
 
     //ODMA TU dodavanje svih ConnectedMachines-a
 
@@ -468,6 +490,9 @@ export class TopologyComponent implements OnInit {
           linkDataArray: linkDataArray
         });
 
+
+    this.nextBoolean = false;
+    this.finishBoolean = true;
 
     document.getElementById("closeTopologyModal").click();
 
