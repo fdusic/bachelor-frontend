@@ -31,10 +31,38 @@
     <td>{{facility.name}}</td>
     <td>{{facility.address}}</td>
     <td><span class="label label-success">{{facility.surface+' m2'}}</span></td>
-    <td><button [routerLink]="['/home/facilities',facility.idF]" type="button" class="btn btn-default btn-sm">More..</button></td>
+    <td>
+      <a [routerLink]="['/home/facilities',facility.idF]" style="cursor: pointer" class="ao_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">More <span class="glyphicon glyphicon-log-in"></span></a>
+      <a *ngIf="roleService.role == 'MANAGER'" [routerLink]="['/home/facilities/update',facility.idF]" style="cursor: pointer" class="ao_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Edit <span class="glyphicon glyphicon-list"></span></a>
+      <a *ngIf="roleService.role == 'MANAGER'" data-toggle="modal" data-target="#confirmDeleteModal" (click)="assignFacilityForDelete(facility)" style="cursor: pointer" class="ao_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Delete <span class="glyphicon glyphicon-trash"></span></a>
+    </td>
   </tr>
   </tbody>
 </table>
+
+
+
+<div id="confirmDeleteModal" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+        <h4 class="modal-title">Delete facility: {{facility.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Are you sure you want to permanently erase this facility?</h4>
+        <p>You can’t undo this action.</p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal" (click)="deleteFacility()"><span class="glyphicon glyphicon-check"></span> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

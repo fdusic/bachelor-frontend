@@ -8,7 +8,7 @@ import {Step} from "../../beans/step";
 import {NgForm} from "@angular/forms";
 import {Link} from "../../beans/link";
 import * as go from "gojs";
-import {GojsBean} from "../../beans/gojsBean";
+import {BabicGoJsBean} from "../../beans/gojsBean";
 import {GojsLink} from "../../beans/gojsLink";
 import {Process} from "../../beans/process";
 import {ProcessSaveHelp} from "../../beans/processSaveHelp";
@@ -341,9 +341,9 @@ export class CreateProcessComponent implements OnInit {
 
   showDiagram() {
 
-    let nodeDataArray : GojsBean[] = [];
+    let nodeDataArray : BabicGoJsBean[] = [];
     for(let i = 0; i < this.steps.length; i++) {
-      let bean = new GojsBean();
+      let bean = new BabicGoJsBean();
       bean.key = this.steps[i].machine.idM.toString();
       bean.text = this.steps[i].name;
       bean.color = this.steps[i].color;

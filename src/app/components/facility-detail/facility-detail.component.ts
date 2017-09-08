@@ -15,6 +15,7 @@ export class FacilityDetailComponent implements OnInit {
   private facility: Facility = new Facility();
   private sections: Section[] = [];
   private closeDetailsBool:boolean = true;
+  private section:Section = new Section();
 
   constructor(private fsmService: FSMService, private router: Router, private activatedRoute: ActivatedRoute, private roleService: RoleService) {
   }
@@ -34,19 +35,30 @@ export class FacilityDetailComponent implements OnInit {
 
   }
 
-  deleteFacility() {
-    this.fsmService.deleteFacility(this.facility.idF).subscribe(
-      () => {
-        this.router.navigateByUrl('/home/facilities');
-      }
-    );
-  }
 
 
   closeDetails(){
     this.closeDetailsBool = false;
     document.getElementById("sectionDiv").classList.remove("col-lg-8");
     document.getElementById("sectionDiv").classList.add("col-lg-12");
+  }
+
+
+
+  assignSectionForDelete(section:Section){
+    this.section = section;
+  }
+
+
+  deleteSection(){
+    this.fsmService.deleteSection(this.section.idS).subscribe(
+      () => {
+        var index = this.sections.indexOf(this.section, 0);
+        if (index > -1) {
+          this.sections.splice(index, 1);
+        }
+      }
+    );
   }
 
 }

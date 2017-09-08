@@ -11,6 +11,7 @@ import {RoleService} from "../../services/role.service";
 export class FacilitiesComponent implements OnInit {
 
   private facilities: Facility[] = [];
+  private facility:Facility = new Facility();
 
   constructor(private fsmService: FSMService, private roleService: RoleService) {
   }
@@ -19,6 +20,23 @@ export class FacilitiesComponent implements OnInit {
     this.fsmService.getFacilities().subscribe(
       (data) => {
         this.facilities = JSON.parse(data['_body']);
+      }
+    );
+  }
+
+
+  assignFacilityForDelete(facility:Facility){
+    this.facility = facility;
+  }
+
+
+  deleteFacility() {
+    this.fsmService.deleteFacility(this.facility.idF).subscribe(
+      () => {
+        var index = this.facilities.indexOf(this.facility, 0);
+        if (index > -1) {
+          this.facilities.splice(index, 1);
+        }
       }
     );
   }

@@ -27,7 +27,7 @@ export class UpdateFacilityComponent implements OnInit {
   onSubmit(facility:Facility){
     this.fsmService.updateFacility(facility).subscribe(
       () => {
-        this.router.navigateByUrl('/home/facilities/'+facility.idF);
+        this.router.navigateByUrl('/home/facilities');
       }
     );
   }

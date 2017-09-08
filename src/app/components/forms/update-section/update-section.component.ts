@@ -30,7 +30,7 @@ export class UpdateSectionComponent implements OnInit {
     this.section.surface = section.surface;
     this.fsmService.updateSection(this.section).subscribe(
       () => {
-        this.router.navigateByUrl('/home/sections/'+section.idS);
+        history.go(-1);
       }
     );
   }

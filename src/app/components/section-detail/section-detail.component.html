@@ -6,10 +6,8 @@
 </div>
 <div class="container" align="center">
 
-  <a class="a_btn btn-outlined btn-black btn-lg" data-toggle="modal" data-target="#confirmDeleteModal" data-wow-delay="0.7s">Delete <span class="glyphicon glyphicon-trash"></span></a>
-  <a [routerLink]="['/home/sections/update',section.idS]" class="a_btn btn-outlined btn-black btn-lg" data-wow-delay="0.7s">Edit <span class="glyphicon glyphicon-list"></span></a>
   <div class="btn-group btn-group-primary">
-  <button data-toggle="dropdown" class="a_btn btn-outlined btn-black btn-lg dropdown-toggle" data-wow-delay="0.7s" type="button"><span class="caret"></span>
+  <button data-toggle="dropdown" class="a_btn btn-outlined btn-black btn-lg dropdown-toggle" data-wow-delay="0.7s" type="button">Options <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
     <li><a [routerLink]="['/home/addmachine',section.idS]">New Machine</a></li>
@@ -25,7 +23,6 @@
 
 <hr>
 
-
 <section class="home-content-top">
   <div class="container-fluid">
 
@@ -37,7 +34,7 @@
         <ul class="nav nav-tabs tabtop  tabsetting">
           <li class="active"> <a href="#tab_default_1" data-toggle="tab"> Details </a> </li>
           <li> <a href="#tab_default_2" data-toggle="tab"> Machines </a> </li>
-          <li> <a href="#tab_default_3" data-toggle="tab" (click)="makeGoTopology()"> Topology </a> </li>
+          <li> <a href="#tab_default_3" data-toggle="tab"> Topology </a> </li>
           <li> <a href="#tab_default_4" data-toggle="tab"> Process </a> </li>
           <li> <a href="#tab_default_6" data-toggle="tab"> Interfaces </a> </li>
           <li> <a href="#tab_default_5" data-toggle="tab"> Protocols </a> </li>
@@ -121,7 +118,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr class="rows" *ngFor="let t of topologies">
+                  <tr class="rows" *ngFor="let t of topologies" id="{{'trtop'+t.idT}}" (click)="makeGoTopology(t)">
                     <th scope="row">{{t.idT}}</th>
                     <td>{{t.name}}</td>
                     <td colspan="3">{{t.description}}</td>
@@ -131,7 +128,7 @@
                 </table>
               </div>
               <div class="col-md-6">
-                <div id="topologyDiv" style="border: solid 1px black; margin-bottom: 10px; height: 400px;"></div>
+                <div id="topologyDiagramDiv" style="border: solid 1px black; margin-bottom: 10px; height: 400px;"></div>
               </div>
             </div>
           </div>
@@ -249,27 +246,6 @@
   </div>
 </div>
 
-<div id="confirmDeleteModal" class="modal fade in">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-        <h4 class="modal-title">Delete section: {{section.name}}</h4>
-      </div>
-      <div class="modal-body">
-        <h4>Are you sure you want to permanently erase this section?</h4>
-        <p>You can’t undo this action.</p>
-      </div>
-      <div class="modal-footer">
-        <div class="btn-group">
-          <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <button class="btn btn-primary" data-dismiss="modal" (click)="deleteSection()"><span class="glyphicon glyphicon-check"></span> Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <div id="confirmMachineDeleteModal" class="modal fade in">

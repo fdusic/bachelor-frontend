@@ -173,6 +173,11 @@ a:hover{
   background: olive;
 }
 
+.tselectedRow{
+  background: olive;
+  color: white;
+}
+
 .rows:hover{
   cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit, DoCheck} from '@angular/core';
 import {Section} from "../../beans/section";
 import {FSMService} from "../../services/fsm.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -13,9 +13,11 @@ import {ProcessService} from "../../services/process.service";
 import {Topology} from "../../beans/topology";
 import {TopologyService} from "../../services/topology.service";
 import * as go from "gojs";
-import {GojsBean} from "../../beans/gojsBean";
+import {BabicGoJsBean} from "../../beans/gojsBean";
 import {GojsLink} from "../../beans/gojsLink";
 import {Link} from "../../beans/link";
+import {ConnectedMachines} from "../../beans/connected-machines";
+import {GoJSBean} from "../../beans/gojs-bean";
 
 declare let swal:any;
 
@@ -24,7 +26,7 @@ declare let swal:any;
   templateUrl: './section-detail.component.html',
   styleUrls: ['./section-detail.component.css']
 })
-export class SectionDetailComponent implements OnInit{
+export class SectionDetailComponent implements OnInit, DoCheck{
 
   private section:Section = new Section();
   private machines:Machine[]=[];
@@ -50,12 +52,24 @@ export class SectionDetailComponent implements OnInit{
 
   /* TOPOLOGY VARIABLES */
   private topologies : Topology[] = [];
+  private selectedTopology:Topology = new Topology();
+  private connectedMachines:ConnectedMachines[]=[];
+
+  private top_$:any = null;
+  private top_diagram:any = null;
+  private linkDataArray:GoJSBean[]=[];
+
   /* TOPOLOGY VARIABLES END! */
 
   constructor(private fsmService:FSMService, private activatedRoute:ActivatedRoute,private router:Router, private roleService: RoleService,
                     private processService : ProcessService, private topologyService : TopologyService) { }
 
 
+
+
+  ngDoCheck(){
+
+  }
 
   ngOnInit() {
 
@@ -100,6 +114,16 @@ export class SectionDetailComponent implements OnInit{
     this.topologyService.getTopologiesForSection(this.activatedRoute.snapshot.params['idS']).subscribe(
       (data) => {
         this.topologies = JSON.parse(data['_body']);
+        if(this.topologies.length > 0){
+          this.selectedTopology = this.topologies[0];
+
+          this.processService.getMachineConnections(this.selectedTopology).subscribe(
+            (data) => {
+              this.connectedMachines = JSON.parse(data['_body']);
+            }
+          );
+        }
+
       }
     );
 
@@ -147,9 +171,9 @@ export class SectionDetailComponent implements OnInit{
   }
 
   showProcessDiagram() {
-    let nodeDataArray : GojsBean[] = [];
+    let nodeDataArray : BabicGoJsBean[] = [];
     for(let i = 0; i < this.selectedProcess.steps.length; i++) {
-      let bean = new GojsBean();
+      let bean = new BabicGoJsBean();
       bean.key = this.selectedProcess.steps[i].machine.idM.toString();
       bean.text = this.selectedProcess.steps[i].name;
       bean.color = this.selectedProcess.steps[i].color;
@@ -208,19 +232,164 @@ export class SectionDetailComponent implements OnInit{
 
   /* TOPOLOGY METHODS */
 
-  makeGoTopology(){
-    alert("sdas");
+  makeGoTopology(topology:Topology){
+
+    this.linkDataArray = [];
+    if(this.top_diagram != null){
+      this.top_diagram.div = null;
+    }
+
+    this.selectedTopology = topology;
+
+    if(!document.getElementById('trtop' + this.selectedTopology.idT).classList.contains('tselectedRow')){
+      document.getElementById('trtop' + this.selectedTopology.idT).classList.add('tselectedRow');
+
+
+      for(var i = 0; i < this.topologies.length; i++){
+        if(this.topologies[i].idT != this.selectedTopology.idT){
+          if(document.getElementById('trtop' + this.topologies[i].idT).classList.contains('tselectedRow')){
+            document.getElementById('trtop' + this.topologies[i].idT).classList.remove('tselectedRow');
+          }
+        }
+      }
+    }
+
+    this.processService.getMachineConnections(this.selectedTopology).subscribe(
+      (data) => {
+        this.connectedMachines = JSON.parse(data['_body']);
+
+        this.top_$ = go.GraphObject.make;
+        this.top_diagram =
+          this.top_$(go.Diagram, "topologyDiagramDiv",
+            { // automatically scale the diagram to fit the viewport's size
+              initialAutoScale: go.Diagram.Uniform,
+              // start everything in the middle of the viewport
+              initialContentAlignment: go.Spot.Center,
+              // disable user copying of parts
+              allowCopy: false,
+              allowDelete:false,
+              // position all of the nodes and route all of the links
+              layout:
+                this.top_$(go.LayeredDigraphLayout,
+                  { direction: 90,
+                    layerSpacing: 10,
+                    columnSpacing: 15,
+                    setsPortSpots: false })
+            });
+
+
+
+        this.top_diagram.nodeTemplate =
+          this.top_$(go.Node, "Vertical",  // the whole node panel
+            this.top_$(go.TextBlock, this.textStyle(),
+              new go.Binding("text", "key")),
+            this.top_$(go.Picture,  // the icon showing the logo
+              // You should set the desiredSize (or width and height)
+              // whenever you know what size the Picture should be.
+              { desiredSize: new go.Size(75, 50) },
+              new go.Binding("source", "key",this.convertKeyImage.bind(this)))
+          );
+
+        this.top_diagram.linkTemplate =
+          this.top_$(go.Link,  // the whole link panel
+            { curve: go.Link.Bezier, toShortLength: 2 },
+            this.top_$(go.Shape,  // the link shape
+              { strokeWidth: 2.5, stroke:"#669453" }),
+            this.top_$(go.Shape,
+              { fromArrow: "Backward", strokeWidth:3.5, stroke:"#669453" }),
+            this.top_$(go.Shape,
+              { toArrow: "Standard", strokeWidth:3.5, stroke:"#669453" })
+          );
+
+
+
+
+        //const linkDataArray = [];
+
+
+
+        for(var i = 0; i < this.connectedMachines.length; i++){
+          let gjsb1:GoJSBean = new GoJSBean();
+          gjsb1.from = 'idM:'+this.connectedMachines[i].machine1.idM +' Name:'+this.connectedMachines[i].machine1.name;
+          gjsb1.to = 'idM:'+this.connectedMachines[i].machine2.idM +' Name:'+this.connectedMachines[i].machine2.name;
+
+
+          this.linkDataArray.push(gjsb1);
+        }
+
+        let otherMachines:Machine[]=[];
+
+
+        for(var i = 0; i < this.selectedTopology.machines.length; i++){
+          otherMachines.push(this.selectedTopology.machines[i]);
+        }
+
+        for(var i = 0; i < this.selectedTopology.machines.length; i++){
+          for(var j = 0; j < this.connectedMachines.length; j++){
+            if((this.selectedTopology.machines[i].idM == this.connectedMachines[j].machine1.idM) || (this.selectedTopology.machines[i].idM == this.connectedMachines[j].machine2.idM)){
+              var index = otherMachines.indexOf(this.selectedTopology.machines[i], 0);
+              if (index > -1) {
+                otherMachines.splice(index, 1);
+                continue;
+              }
+            }
+          }
+        }
+
+        for(var i = 0; i < otherMachines.length; i++){
+          let gjsb1:GoJSBean = new GoJSBean();
+          gjsb1.from = 'idM:'+otherMachines[i].idM +' Name:'+otherMachines[i].name;
+          this.linkDataArray.push(gjsb1);
+        }
+
+
+        // create the model and assign it to the Diagram
+        this.top_diagram.model =
+          this.top_$(go.GraphLinksModel,
+            { // automatically create node data objects for each "from" or "to" reference
+              // (set this property before setting the linkDataArray)
+              archetypeNodeData: {},
+              // process all of the link relationship data
+              linkDataArray: this.linkDataArray
+            });
+
+
+        // this.top_$ = $;
+        // this.top_diagram = myDiagram;
+
+      }
+    );
+
   }
+
+
+  convertKeyImage(key) {
+
+    let s:string[] = key.split(' ');
+    let idM:number = parseInt(s[0].split(':')[1]);
+    let m:Machine = null;
+
+    for(var i = 0; i < this.selectedTopology.machines.length; i++){
+      if(this.selectedTopology.machines[i].idM == idM){
+        m = this.selectedTopology.machines[i];
+        break;
+      }
+    }
+
+    return "../../../images/" + m.idM +m.image;
+  }
+
+  textStyle() {
+    return {
+      margin: 6,
+      textAlign: "center",
+      font: "bold 10pt Beirut"
+    };
+  }
+
 
   /* TOPOLOGY METHODS END! */
 
-  deleteSection(){
-    this.fsmService.deleteSection(this.section.idS).subscribe(
-      () => {
-        this.router.navigateByUrl('/home/facilities');
-      }
-    );
-  }
 
   assignMachineForDelete(machine:Machine){
     this.machineForDelete = machine;
@@ -282,5 +451,11 @@ export class SectionDetailComponent implements OnInit{
     );
 
   }
+
+
+  sipaj(){
+    console.log("dsadas");
+  }
+
 
 }
